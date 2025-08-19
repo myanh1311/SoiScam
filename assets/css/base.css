@@ -1,0 +1,243 @@
+:root {
+    --bgColor: #020617;
+    --bgColor2: rgba(18, 22, 39, 0.8);
+    --bgColor3: rgba(255, 255, 255, 0.05);
+    --textColor: #FFFFFF;
+    --subTextColor: #94A3B8;
+    --gradientColor: linear-gradient(270.33deg, #D9C4AF -70.15%, #FFFFFF 97.57%);
+    --textBtnColor: #090909;
+
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: var(--bgColor);
+    color: var(--textColor);
+    font-size: 16px;
+}
+
+.container {
+    max-width: 1100px;
+    width: 100%;
+    margin-inline: auto;
+    padding-bottom: 100px;
+}
+
+/* Button Styles */
+.btn {
+    padding: 12px 20px;
+    border-radius: 12px;
+    background: var(--gradientColor);
+    color: var(--textBtnColor);
+    font-weight: 500;
+    font-size: 16px;
+    border: none;
+    outline: none;
+}
+
+/* End Button Styles */
+
+/* TITLE STYLE */
+.title {
+    font-weight: 800;
+    font-size: 30px;
+    color: transparent;
+    background: var(--gradientColor);
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+/* END TITLE STYLE */
+
+/* Header Styles */
+.header {
+    margin-top: 25px;
+    margin-inline: 6%;
+    background-color: var(--bgColor2);
+    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+}
+
+.header__logo {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.header_logo-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--textColor);
+}
+
+.header_nav-list {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.header__nav-link {
+    color: var(--subTextColor);
+    font-weight: 500;
+    transition: ease 0.2s;
+}
+
+.header__nav-link.active {
+    color: var(--textColor);
+    font-weight: 600;
+}
+
+.header__nav-link:hover {
+    color: var(--textColor);
+    font-weight: 600;
+}
+
+/* End Header Styles */
+
+/* MODAL STYLE */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    isolation: isolate;
+}
+
+.modal__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+}
+
+.modal__content {
+    height: 800px;
+    width: 623px;
+    background-color: var(--bgColor2);
+    border-radius: 16px;
+    backdrop-filter: blur(70px);
+}
+
+.modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 54px;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1)
+}
+
+.modal__header-title {
+    font-weight: 600;
+}
+
+.modal__header-close {
+    height: 30px;
+    width: 30px;
+    border-radius: 100%;
+    background-color: var(--bgColor3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: ease 0.2s;
+}
+
+.modal__header-close:hover {
+    opacity: 0.5;
+}
+
+.modal__body {
+    padding: 8px 16px;
+    height: calc(800px - 54px);
+    overflow: auto;
+}
+
+.modal__body::-webkit-scrollbar {
+    width: 4px;
+}
+
+.modal__body::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.modal__body::-webkit-scrollbar-thumb {
+    background: var(--gradientColor);
+    border-radius: 10px;
+}
+
+.modal__group:not(:last-child) {
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 10px;
+}
+
+.modal__profile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.modal__info-name {
+    font-weight: 600;
+}
+
+.modal__info-desc {
+    color: var(--subTextColor);
+}
+
+.modal__detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.modal__detail-title {
+    color: var(--subTextColor);
+}
+
+.modal__detail-text {
+    font-weight: 500;
+}
+
+.modal__textarea-content {
+    margin-top: 4px;
+}
+
+.modal__images {
+    margin-top: 10px;
+}
+
+.modal__preview-images {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.modal__preview-images img {
+    height: 237px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: ease;
+}
+
+.modal__preview-images img:hover {
+    opacity: 0.5;
+}
+
+/* End MODAL STYLE */
