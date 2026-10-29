@@ -1,0 +1,44 @@
+/* NOT FOUND (404) PAGE */
+.not-found {
+    max-width: 560px;
+    width: 100%;
+    margin-inline: auto;
+    margin-top: 120px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.not-found__shield {
+    width: 140px;
+    opacity: 0.85;
+}
+
+.not-found__code {
+    margin-top: 16px;
+    font-size: 96px;
+    font-weight: 800;
+    line-height: 1;
+    color: transparent;
+    background: var(--gradientColor);
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+.not-found__title {
+    margin-top: 12px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.not-found__desc {
+    margin-top: 12px;
+    color: var(--subTextColor);
+}
+
+.not-found__btn {
+    margin-top: 32px;
+    text-decoration: none;
+}
+/* END NOT FOUND (404) PAGE */

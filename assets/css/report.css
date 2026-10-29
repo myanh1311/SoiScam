@@ -1,0 +1,213 @@
+/* BREADCRUMB STYLES */
+.breadcrumb {
+    margin-inline: 6%;
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.breadcrumb__link {
+    color: var(--subTextColor);
+    font-size: 14px;
+    transition: ease 0.2s;
+}
+
+.breadcrumb__link:hover {
+    color: var(--textColor);
+}
+
+.breadcrumb__link.active {
+    pointer-events: none;
+    color: var(--textColor);
+}
+
+/* END BREADCRUMB STYLES */
+
+/* FORM REPORT STYLES */
+.form-report {
+    max-width: 830px;
+    margin-inline: auto;
+    margin-top: 4px;
+    padding: 28px clamp(16px, 4vw, 32px) 100px;
+    box-sizing: border-box;
+    border-radius: 24px;
+    /* Chất liệu kính mờ đồng bộ với .hero__panel (index.html) */
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
+    box-shadow:
+        inset 1px 1px 0 rgba(255, 255, 255, 0.08),
+        0 30px 60px rgba(0, 0, 0, 0.35);
+}
+
+.form__heading {
+    font-size: 30px;
+    font-weight: 800;
+    color: transparent;
+    background: var(--gradientColor);
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.form__group-wrap {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.form__group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    position: relative;
+}
+
+.form__title {
+    font-weight: 500;
+    width: max-content;
+}
+
+.form__title span {
+    color: var(--redColor);
+}
+
+.form__textarea,
+.form__input {
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-color: var(--bgColor3);
+    border: none;
+    outline: none;
+    color: var(--textColor);
+}
+
+.form__textarea {
+    resize: none;
+    height: 64px;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.form__group-textarea .form-message {
+    top: 10px;
+    right: 12px;
+}
+
+.form__upload-wrap {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.form__upload-group {
+    /* width: 128px;
+    height: 114px;
+    border-radius: 8px;
+    background-color: var(--bgColor3);
+    position: relative; */
+    max-width: 128px;
+    width: 100%;
+    height: 114px;
+    border-radius: 8px;
+    background-color: var(--bgColor3);
+    position: relative;
+    margin-bottom: 24px;   /* Tăng thêm margin-bottom để chừa chỗ cho dòng chữ absolute bên dưới */
+}
+
+.form__upload-group .form-message {
+  position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-30%); /* Căn giữa chuẩn xác theo ô upload */
+    width: max-content;          /* Cho phép text kéo dài tự nhiên không bị gò bó trong 128px */
+    white-space: nowrap;         /* Giữ chữ trên một hàng nếu muốn */
+    text-align: center;
+    margin-top: 8px;
+}
+
+.form__upload {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.form__upload-text {
+    color: #94A3B8;
+    font-size: 14px;
+}
+
+.form__image-preview {
+    width: 128px;
+    height: 114px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+.form__preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.form__preview-remove {
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    cursor: pointer;
+    top: 4px;
+    right: 4px;
+}
+
+.form__preview-remove > *{
+    pointer-events: none;
+}
+
+.form__action-group {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.form__action-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form__radio-input {
+    width: 24px;
+    height: 24px;
+}
+
+.form__title-radio {
+    font-weight: 500;
+    color: #CCCCCC;
+}
+
+.form-report__btn {
+    margin-top: 40px;
+    margin-inline: auto;
+    display: block;
+}
+
+/* END FORM REPORT STYLES */

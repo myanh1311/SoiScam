@@ -1,0 +1,237 @@
+/* ============================================================
+   HIỆU ỨNG TINH TẾ DÙNG CHUNG (nạp cùng assets/js/fx.js ở mọi trang).
+   Gồm: thanh tiến độ cuộn, ánh sáng theo chuột trên thẻ, ripple nút,
+   skeleton loading, thẻ hiện so le, modal mượt hơn, nút lên đầu trang.
+   Toàn bộ chuyển động chỉ bật trong prefers-reduced-motion: no-preference.
+   ============================================================ */
+
+/* ---------- Thanh tiến độ cuộn trang ---------- */
+.fx-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    z-index: 10000;
+    pointer-events: none;
+    background: transparent;
+}
+
+.fx-progress__bar {
+    height: 100%;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: left;
+    background: linear-gradient(90deg, #db2828, #ff7a59 60%, #d9c4af);
+    box-shadow: 0 0 10px rgba(219, 40, 40, 0.55);
+    will-change: transform;
+}
+
+/* ---------- Header: đổ bóng nhẹ khi đã cuộn ---------- */
+.header.fx-scrolled {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* ---------- Nút lên đầu trang ---------- */
+.fx-totop {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(18, 22, 39, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 900;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s, background-color 0.2s ease;
+}
+
+.fx-totop.is-shown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.fx-totop:hover {
+    background: rgba(219, 40, 40, 0.9);
+}
+
+/* ---------- Ánh sáng theo chuột (spotlight) trên thẻ ---------- */
+.fx-spot {
+    position: relative;
+}
+
+.fx-spot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.11), transparent 65%);
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.fx-spot:hover::after {
+    opacity: 1;
+}
+
+/* Thẻ chưa có isolation thì cần để ::after (z-index:-1) không chui ra sau nền */
+.warning__item.fx-spot,
+.hero__panel.fx-spot,
+.my-stat-card.fx-spot {
+    isolation: isolate;
+}
+
+/* ---------- Ripple khi bấm nút ---------- */
+.fx-ripple-host {
+    position: relative;
+    overflow: hidden;
+}
+
+.fx-ripple-dot {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.35);
+    transform: scale(0);
+    animation: fxRipple 0.6s ease-out forwards;
+}
+
+@keyframes fxRipple {
+    to {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+/* ---------- Skeleton loading ---------- */
+.fx-skeleton,
+.scammer__skeleton {
+    position: relative;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+}
+
+.scammer__skeleton {
+    height: 72px;
+    list-style: none;
+}
+
+.fx-skeleton::after,
+.scammer__skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+    animation: fxShimmer 1.4s infinite;
+}
+
+@keyframes fxShimmer {
+    to {
+        transform: translateX(100%);
+    }
+}
+
+/* ---------- Thẻ hiện so le khi danh sách được render ---------- */
+@media (prefers-reduced-motion: no-preference) {
+    .fx-in {
+        animation: fxItemIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+        animation-delay: calc(var(--fx-i, 0) * 50ms);
+    }
+}
+
+@keyframes fxItemIn {
+    from {
+        opacity: 0;
+        transform: translateY(14px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ---------- Modal mượt hơn: nền mờ + hộp bật nhẹ ---------- */
+.modal__overlay {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .modal__content {
+        animation: fxModalIn 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal__header-close {
+        transition: transform 0.2s ease;
+    }
+
+    .modal__header-close:hover {
+        transform: rotate(90deg);
+    }
+}
+
+@keyframes fxModalIn {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ---------- Vi hiệu ứng nhỏ ---------- */
+@media (prefers-reduced-motion: no-preference) {
+    .header__logo-img {
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .header__logo:hover .header__logo-img {
+        transform: rotate(-8deg) scale(1.08);
+    }
+
+    .btn,
+    .hero__ghost-link {
+        transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    .btn:hover {
+        transform: translateY(-1px);
+        filter: brightness(1.06);
+    }
+
+    .btn:active {
+        transform: translateY(0) scale(0.98);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fx-progress,
+    .fx-ripple-dot {
+        display: none;
+    }
+
+    .fx-skeleton::after,
+    .scammer__skeleton::after {
+        animation: none;
+    }
+}

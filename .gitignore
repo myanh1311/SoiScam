@@ -1,0 +1,17 @@
+# Cấu hình & bí mật riêng của từng máy - KHÔNG đưa lên Git
+api/config/app.local.php
+api/config/db.local.php
+
+# Ảnh người dùng tải lên (sinh ra khi chạy)
+uploads/
+
+# File hệ thống / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.log
+*.bak
+*.zip
+*.jfif

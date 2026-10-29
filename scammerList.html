@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="view-transition" content="same-origin">
+    <title>SOISCAM - Danh sách Scammer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/fx.css">
+    <link rel="stylesheet" href="./assets/css/index.css">
+</head>
+
+<body>
+    <!-- IMAGES FIXED-->
+    <div class="effect-circle-1"></div>
+    <div class="effect-circle-2"></div>
+    <!-- END IMAGES FIXED-->
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="header__logo">
+            <img src="./assets/images/logo.png" alt="logo" class="header__logo-img">
+            <span class="header_logo-name">Soi scam</span>
+        </a>
+        <ul class="header_nav-list" id="headerNavList">
+            <li class="header_nav--item">
+                <a href="index.html" class="header__nav-link">Trang chủ</a>
+            </li>
+            <li class="header_nav--item">
+                <a href="./scammerList.html" class="header__nav-link active">Scamer</a>
+            </li>
+            <li class="header_nav--item">
+                <a href="./report.html" class="header__nav-link">Gửi tố cáo</a>
+            </li>
+            <li class="header_nav--item">
+                <a href="./gioi-thieu.html" class="header__nav-link">Giới thiệu</a>
+            </li>
+        </ul>
+        <div class="header__actions">
+            <button type="button" class="header__burger" id="headerBurgerBtn" aria-label="Mở menu" aria-expanded="false" aria-controls="headerNavList">
+                <svg class="header__burger-icon-open" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                </svg>
+                <svg class="header__burger-icon-close" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                </svg>
+            </button>
+            <div id="headerAccount" class="header__account">
+                <a href="login.html" class="header__auth-link">Đăng nhập</a>
+            </div>
+        </div>
+    </header>
+    <!--End Header -->
+
+    <!-- form search -->
+    <form class="form-search form-search__custom reveal-up-scroll">
+        <input type="text" placeholder="Kiểm tra số tài khoản, SĐT hoặc tên..." class="form-search__input" autocomplete="off" />
+        <button class="btn form-search__btn" type="submit">Tìm kiếm</button>
+    </form>
+    <!-- End form search -->
+
+    <div class="container">
+        <!-- SCAMMER -->
+        <section class="alert-scam alert-scam__custom reveal-up-scroll" style="transition-delay:.08s">
+            <div class="alert-scam__header">
+                <h2 class="alert-scam__title title reveal-el" data-reveal="rise">Danh sách scam</h2>
+                <p class="alert-scam__desc">Đang tải dữ liệu...</p>
+            </div>
+            <div class="scammer-filter">
+                <label class="scammer-filter__item">
+                    <span>Ngân hàng</span>
+                    <select id="filterBank">
+                        <option value="">Tất cả ngân hàng</option>
+                    </select>
+                </label>
+                <label class="scammer-filter__item">
+                    <span>Sắp xếp</span>
+                    <select id="filterSort">
+                        <option value="latest">Mới nhất</option>
+                        <option value="mostReports">Nhiều lượt tố nhất</option>
+                        <option value="oldest">Cũ nhất</option>
+                        <option value="name">Tên A → Z</option>
+                    </select>
+                </label>
+            </div>
+            <ul class="scammer__list">
+                <li class="scammer__state">Đang tải danh sách...</li>
+            </ul>
+        </section>
+        <!-- End SCAMMER -->
+    </div>
+    <!-- JS -->
+    <script src="https://unpkg.com/axios@1.13.2/dist/axios.min.js"></script>
+    <script src="./assets/js/app.js"></script>
+    <script src="./assets/js/scammer-data.js"></script>
+    <script src="./assets/js/auth.js"></script>
+    <script src="./assets/js/header-nav.js"></script>
+    <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/search.js"></script>
+    <script src="./assets/js/reveal.js"></script>
+    <!-- End JS -->
+    <script src="./assets/js/fx.js"></script>
+</body>
+
+</html>

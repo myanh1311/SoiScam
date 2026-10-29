@@ -1,0 +1,509 @@
+/* ============================================================
+   HERO TRANG CHỦ (index.html)
+   Lấy cảm hứng từ 1 mẫu landing page glass-morphism (video nền +
+   thẻ kính mờ + hoạt ảnh xuất hiện dạng rise/lift/settle) nhưng đã
+   viết lại toàn bộ để dùng nội dung + số liệu THẬT của SOISCAM, theo
+   đúng bảng màu tối (--bgColor4/--redColor/--gradientColor) đã có sẵn
+   của site thay vì nền sáng + video của mẫu gốc (không có video/ảnh
+   phù hợp cho SoiScam nên thay bằng nền gradient + quầng sáng chuyển
+   động dựng hoàn toàn bằng CSS, không phụ thuộc file ngoài).
+   ============================================================ */
+.hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    margin: 24px 6% 0;
+    border-radius: 28px;
+    padding: clamp(40px, 6vw, 80px) clamp(22px, 5vw, 64px) clamp(56px, 7vw, 88px);
+    min-height: min(78vh, 660px);
+    display: flex;
+    align-items: center;
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 30px 80px rgba(0, 0, 0, 0.45);
+}
+
+/* ---------- NỀN: gradient tĩnh + quầng sáng trôi nhẹ + lưới chấm ---------- */
+.hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background:
+        radial-gradient(120% 120% at 12% 10%, rgba(219, 40, 40, 0.18), transparent 55%),
+        radial-gradient(100% 100% at 88% 92%, rgba(217, 196, 175, 0.12), transparent 55%),
+        var(--bgColor4);
+}
+
+.hero__bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+    background-size: 24px 24px;
+    -webkit-mask-image: radial-gradient(80% 70% at 50% 40%, #000 40%, transparent 90%);
+    mask-image: radial-gradient(80% 70% at 50% 40%, #000 40%, transparent 90%);
+    opacity: 0.6;
+}
+
+.hero__orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(70px);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.hero__orb--1 {
+    width: 360px;
+    height: 360px;
+    top: -100px;
+    left: -80px;
+    background: var(--redColor);
+    opacity: 0.35;
+}
+
+.hero__orb--2 {
+    width: 300px;
+    height: 300px;
+    bottom: -90px;
+    right: 8%;
+    background: #D9C4AF;
+    opacity: 0.16;
+}
+
+.hero__orb--3 {
+    width: 220px;
+    height: 220px;
+    top: 38%;
+    right: -60px;
+    background: #4ADE80;
+    opacity: 0.1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .hero__orb--1 { animation: heroFloat 10s ease-in-out infinite; }
+    .hero__orb--2 { animation: heroFloat 13s ease-in-out infinite reverse; }
+    .hero__orb--3 { animation: heroFloat 16s ease-in-out infinite; }
+}
+
+@keyframes heroFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(18px, -14px) scale(1.06); }
+}
+
+/* ---------- BỐ CỤC 2 CỘT ---------- */
+.hero__inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1180px;
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+    gap: clamp(36px, 5vw, 76px);
+    align-items: center;
+}
+
+/* ---------- CỘT TRÁI: tiêu đề, mô tả, CTA, số liệu ---------- */
+.hero__eyebrow {
+    font-size: clamp(13px, 1.1vw, 15px);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--subTextColor);
+}
+
+.hero__title {
+    margin-top: 14px;
+    font-size: clamp(34px, 4.6vw, 62px);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+}
+
+.hero__title-line {
+    display: block;
+    color: transparent;
+    background: var(--gradientColor);
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+.hero__tagrow {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.hero__play {
+    flex-shrink: 0;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: #fff;
+    color: #0b1526;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+    transition: transform 0.25s ease;
+}
+
+.hero__play:hover {
+    transform: scale(1.08);
+}
+
+.hero__play svg {
+    margin-left: 2px;
+}
+
+.hero__tag {
+    color: var(--subTextColor);
+    font-size: 15px;
+    line-height: 1.55;
+    max-width: 380px;
+}
+
+.hero__actions {
+    margin-top: 28px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.hero__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    height: 58px;
+    padding: 0 8px 0 26px;
+    border-radius: 999px;
+    background: var(--redColor);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    box-shadow: 0 14px 30px rgba(219, 40, 40, 0.3);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hero__cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 38px rgba(219, 40, 40, 0.42);
+}
+
+.hero__cta-knob {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.22);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero__ghost-link {
+    color: var(--textColor);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    padding-bottom: 3px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.hero__ghost-link:hover {
+    border-color: var(--textColor);
+    color: var(--textColor);
+}
+
+.hero__stats {
+    margin-top: 46px;
+    display: flex;
+    align-items: flex-end;
+    gap: 22px;
+}
+
+.hero__stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero__num {
+    font-size: clamp(32px, 4vw, 50px);
+    font-weight: 200;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+}
+
+.hero__lbl {
+    margin-top: 8px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--subTextColor);
+}
+
+.hero__slash {
+    align-self: center;
+    width: 1px;
+    height: 46px;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* ---------- CỘT PHẢI: thẻ kính mờ "Cộng đồng" ---------- */
+.hero__panel {
+    position: relative;
+    border-radius: 24px;
+    padding: 26px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
+    box-shadow:
+        inset 1px 1px 0 rgba(255, 255, 255, 0.08),
+        0 30px 60px rgba(0, 0, 0, 0.35);
+}
+
+.hero__panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hero__panel-title {
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.hero__panel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--redColor);
+    box-shadow: 0 0 0 4px rgba(219, 40, 40, 0.2);
+}
+
+.hero__shield {
+    margin-top: 18px;
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
+.hero__panel-sub {
+    margin-top: 18px;
+    color: var(--subTextColor);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.hero__meter {
+    margin-top: 24px;
+}
+
+.hero__meter-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--subTextColor);
+    margin-bottom: 8px;
+}
+
+.hero__meter-row span:last-child {
+    color: var(--textColor);
+    font-weight: 700;
+}
+
+.hero__track {
+    width: 100%;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+}
+
+.hero__track i {
+    display: block;
+    height: 100%;
+    width: 0%;
+    border-radius: 999px;
+    background: var(--gradientColor);
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+}
+
+/* ---------- GỢI Ý CUỘN XUỐNG ---------- */
+.hero__scroll-cue {
+    position: absolute;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--subTextColor);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.hero__scroll-cue:hover {
+    color: var(--textColor);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .hero__scroll-cue {
+        animation: heroBounce 2.2s ease-in-out infinite;
+    }
+}
+
+@keyframes heroBounce {
+    0%, 100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, 6px); }
+}
+
+/* ============================================================
+   HOẠT ẢNH XUẤT HIỆN (rise / lift / settle) - CHỈ chạy khi trình
+   duyệt không bật "giảm chuyển động" (prefers-reduced-motion). Mặc
+   định (không có JS, hoặc giảm chuyển động) mọi phần tử đã hiện sẵn
+   nguyên trạng, không phụ thuộc animation để đọc được nội dung.
+   ============================================================ */
+@media (prefers-reduced-motion: no-preference) {
+    .hero__reveal {
+        opacity: 0;
+        animation-duration: 0.75s;
+        animation-timing-function: cubic-bezier(0.22, 0.7, 0.25, 1);
+        animation-fill-mode: both;
+    }
+
+    .hero__reveal[data-reveal="rise"] {
+        animation-name: heroRise;
+        animation-duration: 0.85s;
+        animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero__reveal[data-reveal="lift"] {
+        animation-name: heroLift;
+    }
+
+    .hero__reveal[data-reveal="settle"] {
+        animation-name: heroSettle;
+        animation-duration: 0.8s;
+        animation-timing-function: cubic-bezier(0.2, 0.75, 0.28, 1);
+    }
+}
+
+@keyframes heroRise {
+    from {
+        opacity: 0;
+        clip-path: inset(100% 0 -20% 0);
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        clip-path: inset(-20% 0 -20% 0);
+        transform: translateY(0);
+    }
+}
+
+@keyframes heroLift {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heroSettle {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+    .hero__inner {
+        grid-template-columns: 1fr;
+    }
+
+    .hero__panel {
+        order: -1;
+        max-width: 380px;
+        margin-inline: auto;
+        width: 100%;
+    }
+
+    .hero__copy {
+        text-align: center;
+    }
+
+    .hero__tagrow,
+    .hero__actions,
+    .hero__stats {
+        justify-content: center;
+    }
+
+    .hero__tag {
+        max-width: 420px;
+    }
+}
+
+@media (max-width: 560px) {
+    .hero {
+        margin: 16px 4% 0;
+        padding: 36px 20px 60px;
+        border-radius: 20px;
+        min-height: auto;
+    }
+
+    .hero__title {
+        font-size: clamp(30px, 9vw, 40px);
+    }
+
+    .hero__tagrow {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero__cta {
+        height: 52px;
+        padding: 0 6px 0 22px;
+        font-size: 14px;
+    }
+
+    .hero__stats {
+        gap: 16px;
+    }
+
+    .hero__scroll-cue {
+        display: none;
+    }
+}
+/* END HERO TRANG CHỦ */

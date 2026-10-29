@@ -1,0 +1,768 @@
+/* ============================================================
+   TRANG "TỐ CÁO CỦA TÔI"
+   ============================================================ */
+.my-reports {
+    margin-top: 138px;
+    margin-bottom: 60px;
+}
+
+.my-reports__title {
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.my-reports__desc {
+    color: var(--subTextColor);
+    margin-top: 8px;
+}
+
+.my-reports__inline-status {
+    margin-top: 16px;
+    background-color: var(--bgColor3);
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-size: 14px;
+}
+
+.my-reports__inline-status--error {
+    color: var(--redColor);
+}
+
+.my-reports__list {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.my-reports__state {
+    text-align: center;
+    color: var(--subTextColor);
+    padding: 40px 0;
+}
+
+.my-reports__state a {
+    color: var(--textColor);
+    font-weight: 600;
+}
+
+.my-reports__item {
+    background-color: var(--bgColor4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.my-reports__item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
+.my-reports__item-main {
+    flex: 1;
+    min-width: 220px;
+}
+
+.my-reports__item-name {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.my-reports__item-meta {
+    color: var(--subTextColor);
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.my-reports__item-content {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.my-reports__item-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.my-reports__status {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 100px;
+    white-space: nowrap;
+}
+
+.my-reports__status--approved {
+    background-color: rgba(56, 176, 106, 0.15);
+    color: #4ADE80;
+}
+
+.my-reports__status--pending {
+    background-color: rgba(217, 196, 175, 0.15);
+    color: #D9C4AF;
+}
+
+.my-reports__link {
+    color: var(--subTextColor);
+    font-size: 13px;
+    text-decoration: underline;
+}
+
+.my-reports__link:hover {
+    color: var(--textColor);
+}
+
+.my-reports__delete-btn {
+    background-color: rgba(219, 40, 40, 0.15);
+    color: var(--redColor);
+    border: 1px solid rgba(219, 40, 40, 0.35);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: ease 0.2s;
+}
+
+.my-reports__delete-btn:hover {
+    background-color: rgba(219, 40, 40, 0.3);
+}
+
+.my-reports__delete-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+/* ============================================================
+   PHẢN HỒI TỪ ADMIN (khi 1 tố cáo bị từ chối/xoá kèm lý do)
+   ============================================================ */
+.my-notifications {
+    margin-top: 24px;
+    background-color: rgba(219, 40, 40, 0.08);
+    border: 1px solid rgba(219, 40, 40, 0.25);
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.my-notifications__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.my-notifications__title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--redColor);
+    margin-bottom: 0;
+}
+
+/* Nút lọc "Tất cả / Đã duyệt / Bị từ chối" - đổi myNotificationsFilter
+   rồi render lại từ cache (không gọi lại API), xem my-reports.js. */
+.my-notifications__filters {
+    display: flex;
+    gap: 6px;
+}
+
+.my-notifications__filter-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--subTextColor);
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 600;
+    border-radius: 100px;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: ease 0.2s;
+}
+
+.my-notifications__filter-btn:hover {
+    color: var(--textColor);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.my-notifications__filter-btn.active {
+    background: var(--gradientColor);
+    color: var(--textBtnColor);
+    border-color: transparent;
+}
+
+.my-notifications__empty {
+    color: var(--subTextColor);
+    font-size: 14px;
+    text-align: center;
+    padding: 16px 0;
+}
+
+.my-notifications__list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.my-notifications__item {
+    background-color: var(--bgColor4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 3px solid rgba(219, 40, 40, 0.6);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.my-notifications__item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.my-notifications__item-main {
+    flex: 1;
+    min-width: 220px;
+}
+
+.my-notifications__item-title {
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.my-notifications__item-reason {
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--subTextColor);
+    line-height: 1.5;
+}
+
+.my-notifications__item-date {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--subTextColor);
+}
+
+.my-notifications__dismiss-btn {
+    flex-shrink: 0;
+    background: transparent;
+    color: var(--subTextColor);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: ease 0.2s;
+}
+
+.my-notifications__dismiss-btn:hover {
+    background-color: var(--bgColor3);
+    color: var(--textColor);
+}
+
+.my-notifications__dismiss-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+/* ============================================================
+   ĐỔI MẬT KHẨU (trang cá nhân) - tái dùng class .login-box__* của
+   login.css (đã nhúng thêm ở myReports.html) cho phần input/nút/lỗi.
+   ============================================================ */
+.my-reports__account-box {
+    margin-top: 32px;
+    /* Chất liệu kính mờ đồng bộ với .hero__panel/.login-box. Nới rộng lần
+       nữa (560px -> 700px) + tăng padding cho đỡ trống trải/hẹp so với
+       .container 1100px - đi kèm bố cục 2 cột (.my-reports__field-row bên
+       dưới) để khung rộng hơn không bị trơ 1 cột input dài lẻ loi.
+       max-width 700px < .container 1100px nên khung này là 1 block bình
+       thường sẽ tự dạt về lề trái, để hở mảng trống bên phải trông lệch -
+       margin-inline:auto căn nó ra giữa .container (giống .login-box được
+       căn giữa màn hình ở login.html) thay vì dính lề trái. */
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
+    box-shadow:
+        inset 1px 1px 0 rgba(255, 255, 255, 0.08),
+        0 30px 60px rgba(0, 0, 0, 0.35);
+    border-radius: 20px;
+    padding: 36px 40px;
+    max-width: 700px;
+    margin-inline: auto;
+    box-sizing: border-box;
+}
+
+.my-reports__account-form .login-box__field:first-child {
+    margin-top: 0;
+}
+
+/* 2 ô liên quan đặt cạnh nhau (Họ và tên/Email, Mật khẩu mới/Nhập lại) -
+   giống .form__group-wrap ở report.css - tận dụng bề ngang khung 700px
+   mới thay vì để input dài lẻ loi 1 cột. Khoảng cách phía trên hàng do
+   chính .my-reports__field-row đảm nhận (margin-top bên dưới) thay vì để
+   .login-box__field tự lo - nếu không, rule ":first-child" ở trên vô tình
+   khớp luôn Ô ĐẦU TIÊN bên trong hàng (vì nó cũng là :first-child của
+   chính hàng), xoá mất margin-top của riêng ô đó trong khi ô thứ 2 vẫn giữ
+   margin-top mặc định => ô 1 dính sát field phía trên, ô 2 bị tụt xuống
+   thấp hơn ô 1 - đúng kiểu "lệch xuống" đã gặp phải. */
+.my-reports__field-row {
+    display: flex;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.my-reports__field-row > .login-box__field {
+    flex: 1;
+    min-width: 0;
+    margin-top: 0;
+}
+
+/* Hàng field của "Sửa thông tin" nằm ngay sau tiêu đề <h2>, không có field
+   đơn nào đứng trước nó - giống field đầu tiên của các form khác luôn sát
+   tiêu đề (margin-top: 0 ở trên) - để khoảng cách dưới tiêu đề đồng nhất
+   giữa 2 tab Sửa thông tin/Đổi mật khẩu thay vì hàng này bị thừa 20px. */
+#editProfileForm > .my-reports__field-row {
+    margin-top: 0;
+}
+
+@media (max-width: 560px) {
+    .my-reports__field-row {
+        flex-direction: column;
+    }
+}
+
+/* ============================================================
+   HỒ SƠ CÁ NHÂN: avatar chữ cái đầu + tên + huy hiệu uy tín
+   ============================================================ */
+.my-profile {
+    background-color: var(--bgColor4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 22px 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    animation: myFadeInUp 0.4s ease both;
+}
+
+.my-menu {
+    animation: myFadeInUp 0.4s ease 0.08s both;
+}
+
+@keyframes myFadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .my-profile,
+    .my-menu {
+        animation: none;
+    }
+}
+
+.my-profile__avatar {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    border-radius: 100%;
+    background: var(--gradientColor);
+    color: var(--textBtnColor);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: transform 0.25s ease;
+}
+
+.my-profile:hover .my-profile__avatar {
+    transform: scale(1.05);
+}
+
+.my-profile__info {
+    flex: 1;
+    min-width: 180px;
+}
+
+.my-profile__name {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.my-profile__meta {
+    color: var(--subTextColor);
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.my-profile__badge {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 100px;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: var(--subTextColor);
+}
+
+.my-profile__badge--silver {
+    background-color: rgba(148, 163, 184, 0.18);
+    color: #CBD5E1;
+}
+
+.my-profile__badge--gold {
+    background-color: rgba(217, 196, 175, 0.2);
+    color: #D9C4AF;
+}
+
+.my-profile__badge--diamond {
+    background-color: rgba(219, 40, 40, 0.15);
+    color: var(--redColor);
+}
+
+.my-profile__edit-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 6px;
+}
+
+/* .login-box__submit có width:100% (login.css) - trong hàng flex 2 nút này
+   nó "ăn" hết chỗ khiến nút Quay lại bị ép nhỏ lại và chữ "Quay lại" bị
+   xuống dòng xấu ("Quay" / "lại"). Ép nút Lưu thay đổi chỉ chiếm phần còn
+   lại (flex:1) và giữ Quay lại đúng kích thước tự nhiên, không co lại. */
+.my-profile__edit-actions .login-box__submit {
+    width: auto;
+    flex: 1;
+}
+
+.my-reports__account-cancel-btn {
+    background: transparent;
+    color: var(--subTextColor);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: ease 0.2s;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.my-reports__account-cancel-btn:hover {
+    background-color: var(--bgColor3);
+    color: var(--textColor);
+}
+
+/* ============================================================
+   DANH MỤC ĐIỀU HƯỚNG (chuyển giữa Tổng quan / Tố cáo của tôi / Sửa
+   thông tin / Đổi mật khẩu / Xoá tài khoản) - giống cách chuyển tab ở
+   sidebar trang admin, nhưng dạng thanh ngang cho trang cá nhân.
+   ============================================================ */
+.my-menu {
+    position: relative;
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.my-menu__item {
+    position: relative;
+    background: transparent;
+    border: none;
+    color: var(--subTextColor);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+}
+
+.my-menu__item:hover {
+    color: var(--textColor);
+}
+
+.my-menu__item.active {
+    color: var(--textColor);
+}
+
+.my-menu__item--danger {
+    color: rgba(219, 40, 40, 0.75);
+}
+
+.my-menu__item--danger:hover,
+.my-menu__item--danger.active {
+    color: var(--redColor);
+}
+
+/* Thanh gạch chân tự trượt sang mục đang chọn (đặt vị trí/độ rộng bằng JS) */
+.my-menu__indicator {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background: var(--gradientColor);
+    border-radius: 2px;
+    transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1), width 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.my-menu__indicator--danger {
+    background: var(--redColor);
+}
+
+/* Nội dung từng mục mờ + trượt nhẹ vào mỗi lần chuyển tab, thay vì bật/tắt cứng */
+.my-view {
+    margin-top: 28px;
+}
+
+.my-view--enter {
+    animation: myViewEnter 0.32s ease both;
+}
+
+@keyframes myViewEnter {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .my-view--enter {
+        animation: none;
+    }
+}
+
+/* ============================================================
+   THẺ THỐNG KÊ TỔNG QUAN (trang cá nhân)
+   ============================================================ */
+.my-stats__cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
+}
+
+.my-stat-card {
+    background-color: var(--bgColor4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.my-stat-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
+.my-stat-card__label {
+    color: var(--subTextColor);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.my-stat-card__value {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.my-stat-card--approved .my-stat-card__value {
+    color: #4ADE80;
+}
+
+.my-stat-card--pending .my-stat-card__value {
+    color: #D9C4AF;
+}
+
+.my-stat-card--rejected .my-stat-card__value {
+    color: var(--redColor);
+}
+
+/* ============================================================
+   TÌM KIẾM / LỌC TRẠNG THÁI (danh sách tố cáo của tôi)
+   ============================================================ */
+.my-reports__filter-bar {
+    margin-top: 24px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.my-reports__search {
+    position: relative;
+    flex: 1;
+    min-width: 220px;
+}
+
+.my-reports__search-input {
+    width: 100%;
+    background-color: var(--bgColor4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 100px;
+    padding: 10px 40px 10px 18px;
+    color: var(--textColor);
+    outline: none;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.my-reports__search-icon {
+    position: absolute;
+    top: 50%;
+    right: 14px;
+    transform: translateY(-50%);
+    color: var(--subTextColor);
+    pointer-events: none;
+    width: 16px;
+    height: 16px;
+    transition: color 0.2s ease;
+}
+
+.my-reports__search-input:focus ~ .my-reports__search-icon {
+    color: var(--textColor);
+}
+
+.my-reports__status-filter {
+    background-color: var(--bgColor4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 100px;
+    padding: 10px 18px;
+    color: var(--textColor);
+    outline: none;
+    font-size: 14px;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/* ============================================================
+   PHẢN HỒI TỪ ADMIN - phân biệt màu duyệt (xanh) / từ chối (đỏ) +
+   nút "Tố cáo lại" cho thông báo bị từ chối
+   ============================================================ */
+.my-notifications__item--approved {
+    border-left-color: #4ADE80;
+}
+
+.my-notifications__item--rejected {
+    border-left-color: var(--redColor);
+}
+
+.my-notifications__item-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.my-notifications__again-btn {
+    display: inline-block;
+    background-color: rgba(217, 196, 175, 0.15);
+    color: #D9C4AF;
+    border: 1px solid rgba(217, 196, 175, 0.4);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: ease 0.2s;
+    white-space: nowrap;
+}
+
+.my-notifications__again-btn:hover {
+    background-color: rgba(217, 196, 175, 0.3);
+}
+
+/* ============================================================
+   VÙNG NGUY HIỂM: TỰ XOÁ TÀI KHOẢN
+   ============================================================ */
+.my-reports__danger-zone {
+    border-color: rgba(219, 40, 40, 0.3);
+}
+
+.my-reports__danger-title {
+    color: var(--redColor);
+}
+
+.my-reports__danger-desc {
+    color: var(--subTextColor);
+    font-size: 13px;
+    line-height: 1.6;
+    margin-top: 10px;
+    margin-bottom: 16px;
+}
+
+.my-reports__delete-account-btn {
+    background-color: rgba(219, 40, 40, 0.15);
+    color: var(--redColor);
+    border: 1px solid rgba(219, 40, 40, 0.35);
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: ease 0.2s;
+}
+
+.my-reports__delete-account-btn:hover {
+    background-color: rgba(219, 40, 40, 0.3);
+}
+
+.my-reports__delete-account-btn:active:not(:disabled) {
+    transform: scale(0.97);
+}
+
+.my-reports__delete-account-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+    .my-profile {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .my-reports__filter-bar {
+        flex-direction: column;
+    }
+}
+/* END TRANG "TỐ CÁO CỦA TÔI" */

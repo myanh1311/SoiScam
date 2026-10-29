@@ -1,0 +1,123 @@
+/* ============================================================
+   TRANG GIỚI THIỆU (gioi-thieu.html)
+   ============================================================ */
+
+/* BREADCRUMB - chép lại từ report.css (không nhúng nguyên report.css ở
+   đây vì phần lớn file đó là style riêng cho form gửi tố cáo, không
+   liên quan tới trang này). */
+.breadcrumb {
+    margin-inline: 6%;
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.breadcrumb__link {
+    color: var(--subTextColor);
+    font-size: 14px;
+    transition: ease 0.2s;
+}
+
+.breadcrumb__link:hover {
+    color: var(--textColor);
+}
+
+.breadcrumb__link.active {
+    pointer-events: none;
+    color: var(--textColor);
+}
+/* END BREADCRUMB */
+
+/* NỘI DUNG GIỚI THIỆU */
+.about {
+    max-width: 900px;
+    margin: 60px auto 0;
+    padding: 0 6%;
+}
+
+.about__eyebrow {
+    text-align: center;
+    color: var(--redColor);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.about__title {
+    text-align: center;
+    margin-top: 8px;
+}
+
+.about__desc {
+    max-width: 640px;
+    margin: 16px auto 0;
+    color: var(--subTextColor);
+    text-align: center;
+    line-height: 1.6;
+}
+
+.about__steps {
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.about__step {
+    background-color: var(--bgColor3);
+    border-radius: 16px;
+    padding: 24px 20px;
+    backdrop-filter: blur(70px);
+}
+
+.about__step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    background: var(--gradientColor);
+    color: var(--textBtnColor);
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.about__step-title {
+    margin-top: 14px;
+    font-weight: 600;
+}
+
+.about__step-desc {
+    margin-top: 8px;
+    color: var(--subTextColor);
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.about__note {
+    margin-top: 28px;
+    max-width: 640px;
+    margin-inline: auto;
+    color: var(--subTextColor);
+    font-size: 12.5px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.about__cta {
+    display: block;
+    width: fit-content;
+    margin: 32px auto 80px;
+    text-decoration: none;
+    text-align: center;
+}
+
+@media (max-width: 880px) {
+    .about__steps {
+        grid-template-columns: 1fr;
+    }
+}
+/* END NỘI DUNG GIỚI THIỆU */

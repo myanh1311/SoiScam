@@ -1,0 +1,315 @@
+/* ============================================================
+   TRANG ĐĂNG NHẬP
+   ============================================================ */
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+/* Ảnh nền mạch điện tử (do người dùng thêm vào assets/images) - đặt ở
+   body thay vì .login-page. Lý do: body có "isolation: isolate" (xem
+   base.css) nên tự nó là 1 stacking context; nếu đặt background ngay
+   trên .login-page (phần tử không position/z-index, tức ở mức "auto")
+   thì nó sẽ vẽ ĐÈ LÊN TRÊN lớp hạt rơi .login-particles (z-index: -1,
+   position: fixed) vì trong cùng 1 stacking context, mức "auto" luôn
+   nằm trên mức âm. Chuyển background ra body để nó vẽ ở lớp nền cùng
+   mức với các hạt (hoặc thấp hơn), hạt rơi mới nổi lên trên được.
+   Đi kèm 1 lớp gradient tối cùng tông --bgColor (#020617) phủ lên trên
+   để ảnh không quá chói, vẫn giữ được độ tương phản cho khung đăng
+   nhập kính mờ và chữ trắng phía trên. */
+body:has(.login-page) {
+    background-image:
+        linear-gradient(180deg, rgba(2, 6, 23, 0.88), rgba(2, 6, 23, 0.94)),
+        url("../images/login-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Hạt trôi nhẹ ở nền trang login (login-particles.js tự tạo số lượng
+   hạt ngẫu nhiên và chèn vào đây) - ý tưởng mượn từ 1 video "kính mờ +
+   lá mùa thu rơi" trên Pinterest, nhưng đổi lá thành đốm sáng nhỏ trung
+   tính cho hợp giao diện tối/nghiêm túc của SoiScam. position: fixed +
+   z-index âm giống .effect-circle-1/2 ở base.css - luôn nằm dưới cùng,
+   không che khung đăng nhập, không chặn click. */
+.login-particles {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.login-particle {
+    position: absolute;
+    top: -10px;
+    border-radius: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+    box-shadow: 0 0 6px 1px rgba(255, 255, 255, 0.35);
+    opacity: 0;
+    animation-name: loginParticleFall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+/* Xen kẽ vài hạt màu đỏ nhạt (cùng tông --redColor của thương hiệu) cho
+   đỡ đơn điệu toàn trắng - mỗi hạt thứ 3 sẽ đổi màu. */
+.login-particle:nth-child(3n) {
+    background: radial-gradient(circle, rgba(219, 40, 40, 0.75), rgba(219, 40, 40, 0));
+    box-shadow: 0 0 6px 1px rgba(219, 40, 40, 0.3);
+}
+
+@keyframes loginParticleFall {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translate(var(--login-particle-drift, 0px), 110vh);
+        opacity: 0;
+    }
+}
+
+.login-page__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--textColor);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+.login-page__logo img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 420px;
+    /* Chất liệu kính mờ đồng bộ với .hero__panel (index.html) */
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
+    box-shadow:
+        inset 1px 1px 0 rgba(255, 255, 255, 0.08),
+        0 30px 60px rgba(0, 0, 0, 0.35);
+    border-radius: 20px;
+    padding: 36px 32px;
+    box-sizing: border-box;
+}
+
+.login-box__form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Cùng lỗi như .modal ở base.css: display: flex ở trên đè mất rule ẩn
+   mặc định của thuộc tính "hidden", nên phải khai báo lại display: none
+   khi phần tử có hidden thì mới ẩn được form đăng nhập/đăng ký đúng lúc. */
+.login-box__form[hidden] {
+    display: none;
+}
+
+.login-box__title {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.login-box__desc {
+    color: var(--subTextColor);
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.login-box__field {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.login-box__field label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--subTextColor);
+}
+
+.login-box__field input {
+    background-color: var(--bgColor3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: var(--textColor);
+    outline: none;
+    font-family: inherit;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+.login-box__field input:focus {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Khung bọc quanh input mật khẩu (được password-toggle.js tự chèn vào
+   trước input) để định vị nút "Hiện/Ẩn" nổi bên phải ô, không đụng tới
+   layout label/field xung quanh. */
+.login-box__password-wrap {
+    position: relative;
+}
+
+.login-box__password-wrap input {
+    width: 100%;
+    padding-right: 44px;
+}
+
+.login-box__toggle-pass {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--subTextColor);
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+}
+
+.login-box__toggle-pass svg {
+    width: 18px;
+    height: 18px;
+}
+
+.login-box__toggle-pass:hover {
+    color: var(--textColor);
+}
+
+.login-box__error {
+    color: var(--redColor);
+    font-size: 13px;
+    margin-top: 12px;
+    min-height: 16px;
+}
+
+/* Dùng lại cùng 1 thẻ p để báo thành công (vd sau khi đăng ký xong) thay
+   vì báo lỗi - đổi màu sang xanh lá cho dễ phân biệt. */
+.login-box__error--success {
+    color: #4ADE80;
+}
+
+.login-box__submit {
+    margin-top: 8px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.login-box__submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Vạch chia "HOẶC" giữa nút Đăng nhập và nút Đăng nhập bằng Google -
+   2 vạch 2 bên không cố tình lệch nhau như bản gốc (613px cố định),
+   ở đây dùng flex:1 co giãn theo bề ngang thật của khung vì login-box
+   là fluid, không phải khung pixel cố định. */
+.login-box__divider {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.login-box__divider i {
+    flex: 1 1 auto;
+    height: 1px;
+    background: var(--divider, rgba(255, 255, 255, 0.14));
+    font-style: normal;
+}
+
+.login-box__divider b {
+    flex: 0 0 auto;
+    color: var(--subTextColor);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+}
+
+/* Khung chứa nút Google do chính thư viện Google Identity Services vẽ
+   ra (renderButton trong google-auth.js) - chỉ canh giữa + chừa
+   khoảng cách, không tự vẽ nút vì Google không cho tuỳ biến pixel-lock
+   như các nút khác trên trang (đổi màu/kiểu dáng dễ vi phạm điều
+   khoản + dễ vỡ khi Google cập nhật thư viện). */
+.login-box__google {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+}
+
+.login-box__switch {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--subTextColor);
+    font-size: 14px;
+}
+
+.login-box__link-btn {
+    background: none;
+    border: none;
+    color: var(--textColor);
+    font-weight: 600;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+    margin-left: 4px;
+}
+/* Ô nhập mã xác nhận 6 số (trang quên mật khẩu): chữ to, giãn cách rộng,
+   canh giữa cho dễ nhìn và dễ dán mã từ email. */
+.login-box__field input.login-box__code-input {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 12px;
+    padding-left: 28px;
+    font-variant-numeric: tabular-nums;
+}
+
+.login-box__code-input::placeholder {
+    letter-spacing: 12px;
+    font-weight: 400;
+}
+
+.login-box__link-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    text-decoration: none;
+}
+
+.login-box__form[hidden] {
+    display: none;
+}
+/* END TRANG ĐĂNG NHẬP */

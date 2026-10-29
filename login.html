@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Cho phép trình duyệt (Chrome/Edge) tự làm hiệu ứng mờ dần mượt mà khi
+         chuyển từ trang này sang trang khác trong cùng site - không cần JS,
+         trình duyệt chưa hỗ trợ thì tự bỏ qua, không lỗi gì cả. -->
+    <meta name="view-transition" content="same-origin">
+    <title>SOISCAM - Đăng nhập</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/fx.css">
+    <link rel="stylesheet" href="./assets/css/login.css">
+</head>
+
+<body>
+    <!-- IMAGES FIXED-->
+    <div class="effect-circle-1"></div>
+    <div class="effect-circle-2"></div>
+    <!-- END IMAGES FIXED-->
+
+    <div class="login-page">
+        <a href="index.html" class="login-page__logo reveal-up-scroll">
+            <img src="./assets/images/logo.png" alt="logo">
+            <span>Soi scam</span>
+        </a>
+
+        <div class="login-box reveal-up-scroll" style="transition-delay:.08s">
+            <!-- FORM ĐĂNG NHẬP -->
+            <form id="loginForm" class="login-box__form">
+                <h1 class="login-box__title reveal-el" data-reveal="rise">Đăng nhập</h1>
+                <p class="login-box__desc">
+                    Đăng nhập bằng tài khoản người dùng để theo dõi tố cáo của bạn, hoặc bằng tài khoản quản trị để vào trang Admin.
+                </p>
+
+                <div class="login-box__field">
+                    <label for="loginUsername">Tên đăng nhập</label>
+                    <input type="text" id="loginUsername" autocomplete="username" placeholder="Nhập tên đăng nhập...">
+                </div>
+                <div class="login-box__field">
+                    <label for="loginPassword">Mật khẩu</label>
+                    <input type="password" id="loginPassword" autocomplete="current-password" placeholder="Nhập mật khẩu...">
+                </div>
+
+                <p id="loginError" class="login-box__error"></p>
+
+                <button type="submit" id="loginSubmitBtn" class="btn login-box__submit">Đăng nhập</button>
+
+                <div class="login-box__divider">
+                    <i></i><b>HOẶC</b><i></i>
+                </div>
+
+                <div id="googleBtnContainer" class="login-box__google"></div>
+                <p id="googleLoginError" class="login-box__error"></p>
+
+                <p class="login-box__switch">
+                    <a href="forgot-password.html" class="login-box__link-btn">Quên mật khẩu?</a>
+                </p>
+                <p class="login-box__switch">
+                    Chưa có tài khoản?
+                    <button type="button" id="showRegisterBtn" class="login-box__link-btn">Đăng ký ngay</button>
+                </p>
+            </form>
+
+            <!-- FORM ĐĂNG KÝ (tài khoản người dùng) -->
+            <form id="registerForm" class="login-box__form" hidden>
+                <h1 class="login-box__title reveal-el" data-reveal="rise">Đăng ký tài khoản</h1>
+                <p class="login-box__desc">
+                    Tạo tài khoản người dùng để theo dõi các tố cáo bạn đã gửi.
+                </p>
+
+                <div class="login-box__field">
+                    <label for="registerName">Họ và tên</label>
+                    <input type="text" id="registerName" autocomplete="name" placeholder="Nhập họ và tên...">
+                </div>
+                <div class="login-box__field">
+                    <label for="registerUsername">Tên đăng nhập</label>
+                    <input type="text" id="registerUsername" autocomplete="username" placeholder="Đặt tên đăng nhập...">
+                </div>
+                <div class="login-box__field">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" autocomplete="email" placeholder="Nhập email (dùng để lấy lại mật khẩu nếu quên)...">
+                </div>
+                <div class="login-box__field">
+                    <label for="registerPassword">Mật khẩu</label>
+                    <input type="password" id="registerPassword" autocomplete="new-password" placeholder="Đặt mật khẩu (ít nhất 6 ký tự)...">
+                </div>
+                <div class="login-box__field">
+                    <label for="registerPasswordConfirm">Nhập lại mật khẩu</label>
+                    <input type="password" id="registerPasswordConfirm" autocomplete="new-password" placeholder="Nhập lại mật khẩu...">
+                </div>
+
+                <p id="registerError" class="login-box__error"></p>
+
+                <button type="submit" id="registerSubmitBtn" class="btn login-box__submit">Đăng ký</button>
+
+                <p class="login-box__switch">
+                    Đã có tài khoản?
+                    <button type="button" id="showLoginBtn" class="login-box__link-btn">Đăng nhập</button>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="https://unpkg.com/axios@1.13.2/dist/axios.min.js"></script>
+    <script src="./assets/js/scammer-data.js"></script>
+    <script src="./assets/js/auth.js"></script>
+    <script src="./assets/js/login.js"></script>
+    <script src="./assets/js/google-config.js"></script>
+    <script src="./assets/js/google-auth.js"></script>
+    <!-- Google Identity Services - thư viện chính thức của Google để hiện
+         nút "Đăng nhập bằng Google". Nạp SAU google-auth.js và gọi
+         initGoogleSignIn() ngay khi tải xong (thuộc tính onload) vì
+         async khiến file này có thể chạy trước/sau các script khác,
+         không đoán trước được thứ tự. -->
+    <script src="https://accounts.google.com/gsi/client" async defer onload="initGoogleSignIn()"></script>
+    <script src="./assets/js/password-toggle.js"></script>
+    <script src="./assets/js/login-particles.js"></script>
+    <script src="./assets/js/reveal.js"></script>
+    <!-- End JS -->
+    <script src="./assets/js/fx.js"></script>
+</body>
+
+</html>

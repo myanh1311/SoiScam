@@ -1,255 +1,241 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOISCAM</title>
+    <meta name="view-transition" content="same-origin">
+    <title>SOISCAM - Tra cứu &amp; tố cáo lừa đảo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.9.0/lightgallery.min.js" integrity="sha512-OvMWhVbeefEM36i9C8S/GxQGdykcs18wRi/a5LwWL7GVSuP1640hRj5xbZaiqop+lRayKlo7HA17Ys8azSedpw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/fx.css">
     <link rel="stylesheet" href="./assets/css/index.css">
+    <link rel="stylesheet" href="./assets/css/hero.css">
 </head>
 
 <body>
+    <!-- IMAGES FIXED-->
+     <div class="images-fixed">
+        <img src="./assets/images/shield.png" alt="" class="image-shield">
+        <img src="./assets/images/stars.png" alt="" class="image-stars">
+     </div>
+     <div class="effect-circle-1"></div>
+     <div class="effect-circle-2"></div>
+    <!-- END IMAGES FIXED-->
     <!-- Header -->
     <header class="header">
-        <a href="" class="header__logo">
+        <a href="index.html" class="header__logo">
             <img src="./assets/images/logo.png" alt="logo" class="header__logo-img">
-            <sapan class="header_logo-name">Soi scam</sapan>
+            <span class="header_logo-name">Soi scam</span>
         </a>
-        <ul class="header_nav-list">
+        <ul class="header_nav-list" id="headerNavList">
             <li class="header_nav--item">
-                <a href="#" class="header__nav-link active">Trang chủ</a>
+                <a href="index.html" class="header__nav-link active">Trang chủ</a>
             </li>
             <li class="header_nav--item">
-                <a href="#" class="header__nav-link">Scamer</a>
+                <a href="./scammerList.html" class="header__nav-link">Scamer</a>
             </li>
             <li class="header_nav--item">
-                <a href="#" class="header__nav-link">Giới thiệu</a>
+                <a href="./report.html" class="header__nav-link">Gửi tố cáo</a>
+            </li>
+            <li class="header_nav--item">
+                <a href="./gioi-thieu.html" class="header__nav-link">Giới thiệu</a>
             </li>
         </ul>
-        <a href="#" class="btn header__btn">Gửi tố cáo</a>
+        <div class="header__actions">
+            <button type="button" class="header__burger" id="headerBurgerBtn" aria-label="Mở menu" aria-expanded="false" aria-controls="headerNavList">
+                <svg class="header__burger-icon-open" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                </svg>
+                <svg class="header__burger-icon-close" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                </svg>
+            </button>
+            <div id="headerAccount" class="header__account">
+                <a href="login.html" class="header__auth-link">Đăng nhập</a>
+            </div>
+        </div>
     </header>
     <!--End Header -->
 
-    <!-- Content -->
-    <section class="content">
-        <h1 class="content__heading">KIỂM TRA & TỐ CÁO SCAMMER</h1>
-        <p class="content__desc">
-            Website lưu trữ dữ liệu lừa đảo trên mxh mà không chịu bất kỳ hạn chế seach của một thuật toán nào trên
-            Facebook
-        </p>
-        <form class="form__search">
-            <input type="text" placeholder="Kiểm tra số tài khoản ngân hàng..." class="form-search__input" />
-            <button class="btn form-search__btn" type="submit">Tìm kiếm</button>
-        </form>
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero__bg" aria-hidden="true">
+            <span class="hero__orb hero__orb--1"></span>
+            <span class="hero__orb hero__orb--2"></span>
+            <span class="hero__orb hero__orb--3"></span>
+        </div>
+
+        <div class="hero__inner">
+            <div class="hero__copy">
+                <p class="hero__eyebrow hero__reveal" data-reveal="lift" style="animation-delay:.05s">Nền tảng cộng đồng chống lừa đảo trực tuyến</p>
+                <h1 class="hero__title">
+                    <span class="hero__title-line hero__reveal" data-reveal="rise" style="animation-delay:.12s">Soi kỹ trước khi</span>
+                    <span class="hero__title-line hero__reveal" data-reveal="rise" style="animation-delay:.2s">chuyển khoản</span>
+                </h1>
+                <div class="hero__tagrow hero__reveal" data-reveal="settle" style="animation-delay:.32s">
+                    <button type="button" class="hero__play" id="heroPlayBtn" aria-label="Xem các kiểu lừa đảo thường gặp">
+                        <svg width="13" height="14" viewBox="0 0 13 14" fill="none" aria-hidden="true">
+                            <path d="M1.4 1.3 11.6 7 1.4 12.7z" fill="currentColor" />
+                        </svg>
+                    </button>
+                    <span class="hero__tag">Tra cứu số tài khoản, SĐT nghi ngờ lừa đảo trong tích tắc — hoàn toàn miễn phí.</span>
+                </div>
+                <div class="hero__actions hero__reveal" data-reveal="settle" style="animation-delay:.4s">
+                    <a href="report.html" class="hero__cta">
+                        <span>Gửi tố cáo ngay</span>
+                        <span class="hero__cta-knob">
+                            <svg width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                                <path d="m6.6 3.6 6 5.4-6 5.4" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                    </a>
+                    <a href="scammerList.html" class="hero__ghost-link">Xem danh sách Scammer</a>
+                </div>
+
+                <div class="hero__stats hero__reveal" data-reveal="lift" style="animation-delay:.5s">
+                    <div class="hero__stat">
+                        <span class="hero__num" id="heroStatScammers">0</span>
+                        <span class="hero__lbl">Đối tượng<br>bị tố cáo</span>
+                    </div>
+                    <span class="hero__slash" aria-hidden="true"></span>
+                    <div class="hero__stat">
+                        <span class="hero__num" id="heroStatReports">0</span>
+                        <span class="hero__lbl">Tổng<br>tố cáo</span>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="hero__panel hero__reveal" data-reveal="settle" style="animation-delay:.22s">
+                <div class="hero__panel-head">
+                    <span class="hero__panel-title">Cộng đồng</span>
+                    <span class="hero__panel-dot" aria-hidden="true"></span>
+                </div>
+                <span class="hero__shield" aria-hidden="true">
+                    <svg width="26" height="34" viewBox="0 0 30 39" fill="none">
+                        <path d="M15 1.2 1.6 6.6v13.1c0 6.6 5.1 12.6 13.4 17.9 8.3-5.3 13.4-11.3 13.4-17.9V6.6z" stroke="#0b1526" stroke-width="2" stroke-linejoin="round" />
+                        <path d="M2.1 18.9c4.6-1.1 8.9-1.6 12.9-1.6s8.3.5 12.9 1.6" stroke="#0b1526" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </span>
+                <p class="hero__panel-sub">Cùng nhau cảnh báo, bảo vệ ví tiền của bạn và người thân trước lừa đảo online.</p>
+                <div class="hero__meter">
+                    <div class="hero__meter-row">
+                        <span>Tỉ lệ tố cáo được duyệt</span>
+                        <span id="heroApprovalRate">–</span>
+                    </div>
+                    <div class="hero__track"><i id="heroApprovalBar"></i></div>
+                </div>
+            </aside>
+        </div>
+
+        <button type="button" class="hero__scroll-cue" id="heroScrollCue" aria-label="Cuộn xuống">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 6l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
     </section>
-    <!-- End Content -->
+    <!-- END HERO -->
 
     <div class="container">
+        <!-- TÌM KIẾM NHANH -->
+        <section class="content reveal-up-scroll">
+            <form class="form-search">
+                <input type="text" placeholder="Kiểm tra số tài khoản, SĐT hoặc tên..." class="form-search__input" autocomplete="off" />
+                <button class="btn form-search__btn" type="submit">Tìm kiếm</button>
+            </form>
+        </section>
+        <!-- END TÌM KIẾM NHANH -->
+
         <!-- SCAMMER -->
-        <section class="alert-scam">
+        <section class="alert-scam reveal-up-scroll" style="transition-delay:.08s">
             <div class="alert-scam__header">
-                <h2 class="alert-scam__title title">Hôm nay 21/09/2024</h2>
-                <p class="alert-scam__desc">CÓ 26 CẢNH BÁO</p>
+                <h2 class="alert-scam__title today title reveal-el" data-reveal="rise">Hôm nay </h2>
+                <p class="alert-scam__desc">CÓ 0 CẢNH BÁO</p>
             </div>
             <ul class="scammer__list">
-                <li class="scammer__item">
-                    <img src="./assets/images/avatar-1.png" alt="avatar" class="scammer__avatar">
-                    <div class="scammer__info">
-                        <h3 class="scammer__name">Nguyen Shane</h3>
-                        <div class="scammer__date">#50 - 12/02/2024</div>
-                    </div>
-                </li>
-                <li class="scammer__item">
-                    <img src="./assets/images/avatar-1.png" alt="avatar" class="scammer__avatar">
-                    <div class="scammer__info">
-                        <h3 class="scammer__name">Nguyen Shane</h3>
-                        <div class="scammer__date">#50 - 12/02/2024</div>
-                    </div>
-                </li>
-                <li class="scammer__item">
-                    <img src="./assets/images/avatar-1.png" alt="avatar" class="scammer__avatar">
-                    <div class="scammer__info">
-                        <h3 class="scammer__name">Nguyen Shane</h3>
-                        <div class="scammer__date">#50 - 12/02/2024</div>
-                    </div>
-                </li>
-                <li class="scammer__item">
-                    <img src="./assets/images/avatar-1.png" alt="avatar" class="scammer__avatar">
-                    <div class="scammer__info">
-                        <h3 class="scammer__name">Nguyen Shane</h3>
-                        <div class="scammer__date">#50 - 12/02/2024</div>
-                    </div>
-                </li>
-                <li class="scammer__item">
-                    <img src="./assets/images/avatar-1.png" alt="avatar" class="scammer__avatar">
-                    <div class="scammer__info">
-                        <h3 class="scammer__name">Nguyen Shane</h3>
-                        <div class="scammer__date">#50 - 12/02/2024</div>
-                    </div>
-                </li>
-                <li class="scammer__item">
-                    <img src="./assets/images/avatar-1.png" alt="avatar" class="scammer__avatar">
-                    <div class="scammer__info">
-                        <h3 class="scammer__name">Nguyen Shane</h3>
-                        <div class="scammer__date">#50 - 12/02/2024</div>
-                    </div>
-                </li>
-                <li class="scammer__item">
-                    <img src="./assets/images/avatar-1.png" alt="avatar" class="scammer__avatar">
-                    <div class="scammer__info">
-                        <h3 class="scammer__name">Nguyen Shane</h3>
-                        <div class="scammer__date">#50 - 12/02/2024</div>
-                    </div>
-                </li>
-                <li class="scammer__item">
-                    <img src="./assets/images/avatar-1.png" alt="avatar" class="scammer__avatar">
-                    <div class="scammer__info">
-                        <h3 class="scammer__name">Nguyen Shane</h3>
-                        <div class="scammer__date">#50 - 12/02/2024</div>
-                    </div>
-                </li>
+
+
             </ul>
         </section>
         <!-- End SCAMMER -->
 
         <!-- WARNING -->
         <section class="warning"></section>
-        <h2 class="warning__title title">Một số kiểu lừa đảo online thường gặp</h2>
+        <h2 class="warning__title title reveal-up-scroll">Một số kiểu lừa đảo online thường gặp</h2>
         <ul class="warning__list">
-            <li class="warning__item">
+            <li class="warning__item reveal-up-scroll lift-hover" style="transition-delay:.04s">
                 <div class="warning__header">
                     <span class="warning__header-icon">
                         <img src="./assets/images/arrow-right.svg" alt="icon">
                     </span>
                     <h4 class="warning__item-title">Giả mạo tên miền, website</h4>
                 </div>
-                <div class="warning__content">Bọn lừa đảo mua 1 tên miền gần giống (chỉ lệch 1 vài ký tự) sau đó gắn vào
-                    web fake có giao diện giống hệt để lừa đảo</div>
+                <div class="warning__content">Bọn lừa đảo mua 1 tên miền gần giống (chỉ lệch 1 vài ký tự) sau đó gắn vào web fake có giao diện giống hệt để lừa đảo.</div>
             </li>
-            <li class="warning__item">
+            <li class="warning__item reveal-up-scroll lift-hover" style="transition-delay:.08s">
                 <div class="warning__header">
                     <span class="warning__header-icon">
                         <img src="./assets/images/arrow-right.svg" alt="icon">
                     </span>
-                    <h4 class="warning__item-title">Giả mạo tên miền, website</h4>
+                    <h4 class="warning__item-title">Giả danh người thân, bạn bè</h4>
                 </div>
-                <div class="warning__content">Bọn lừa đảo mua 1 tên miền gần giống (chỉ lệch 1 vài ký tự) sau đó gắn vào
-                    web fake có giao diện giống hệt để lừa đảo</div>
+                <div class="warning__content">Chiếm tài khoản Facebook/Zalo hoặc lập tài khoản giả rồi nhắn tin mượn tiền khẩn cấp. Luôn gọi điện xác minh trước khi chuyển khoản.</div>
             </li>
-            <li class="warning__item">
+            <li class="warning__item reveal-up-scroll lift-hover" style="transition-delay:.12s">
                 <div class="warning__header">
                     <span class="warning__header-icon">
                         <img src="./assets/images/arrow-right.svg" alt="icon">
                     </span>
-                    <h4 class="warning__item-title">Giả mạo tên miền, website</h4>
+                    <h4 class="warning__item-title">Giả danh cơ quan chức năng</h4>
                 </div>
-                <div class="warning__content">Bọn lừa đảo mua 1 tên miền gần giống (chỉ lệch 1 vài ký tự) sau đó gắn vào
-                    web fake có giao diện giống hệt để lừa đảo</div>
+                <div class="warning__content">Gọi điện tự xưng công an, ngân hàng, bưu điện... doạ có liên quan vụ án và yêu cầu chuyển tiền "kiểm tra". Cơ quan thật không làm việc qua điện thoại như vậy.</div>
             </li>
-            <li class="warning__item">
+            <li class="warning__item reveal-up-scroll lift-hover" style="transition-delay:.16s">
                 <div class="warning__header">
                     <span class="warning__header-icon">
                         <img src="./assets/images/arrow-right.svg" alt="icon">
                     </span>
-                    <h4 class="warning__item-title">Giả mạo tên miền, website</h4>
+                    <h4 class="warning__item-title">Việc nhẹ lương cao, đầu tư sinh lời</h4>
                 </div>
-                <div class="warning__content">Bọn lừa đảo mua 1 tên miền gần giống (chỉ lệch 1 vài ký tự) sau đó gắn vào
-                    web fake có giao diện giống hệt để lừa đảo</div>
+                <div class="warning__content">Mời làm nhiệm vụ online, đầu tư lãi cao bất thường. Ban đầu cho nhận tiền nhỏ để tạo niềm tin rồi yêu cầu nạp số tiền lớn và biến mất.</div>
             </li>
         </ul>
         <!--End WARNING -->
+    </div>
 
-        <!-- MODAL DETAIL SCAMMER -->
-        <section class="modal">
-            <div class="modal__overlay"></div>
-            <div class="modal__content">
-                <div class="modal__header">
-                    <div class="modal__header-title">Chi tiết tố cáo</div>
-                    <div class="modal__header-close">
-                        <img src="./assets/images/close-icon.svg" alt="close icon">
-                    </div>
-                </div>
-                <div class="modal__body">
-                    <div class="modal__group">
-                        <div class="modal__profile">
-                            <div class="modal__profile-avatar">
-                                <img src="./assets/images/avatar-1.png" alt="avatar">
-                            </div>
-                            <div class="modal__info">
-                                <h4 class="modal__info-name">Nguyễn Văn A</h4>
-                                <p class="modal__info-desc">#50 - Tố vào ngày 12/02/2024</p>
-                            </div>
-                        </div>
-                        <div class="modal__detail">
-                            <span class="modal__detail-title">Số điện thoại</span>
-                            <span class="modal__detail-text">0333990859</span>
-                        </div>
-                        <div class="modal__detail">
-                            <span class="modal__detail-title">Số tài khoản</span>
-                            <span class="modal__detail-text">342423443</span>
-                        </div>
-                        <div class="modal__detail">
-                            <span class="modal__detail-title">Ngân hàng</span>
-                            <span class="modal__detail-text">ACB</span>
-                        </div>
-                    </div>
-                    <div class="modal__group">
-                        <div class="modal__profile">
-                            <div class="modal__profile-avatar">
-                                <img src="./assets/images/avatar-2.png" alt="avatar">
-                            </div>
-                            <div class="modal__info">
-                                <h4 class="modal__info-name">Nguyễn Văn B</h4>
-                                <p class="modal__info-desc">Người tố cáo</p>
-                            </div>
-                        </div>
-                        <div class="modal__detail">
-                            <span class="modal__detail-title">Trạng thái</span>
-                            <span class="modal__detail-text">Nạn nhân</span>
-                        </div>
-                        <div class="modal__detail">
-                            <span class="modal__detail-title">Liên hệ</span>
-                            <span class="modal__detail-text">0356655665</span>
-                        </div>
-                        <div class="modal__textarea">
-                            <span class="modal__detail-title">Nội dung tố cáo</span>
-                            <p class="modal__textarea-content">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in
-                            </p>
-                        </div>
-                        <div class="modal__images">
-                            <span class="modal__detail-title">Hình ảnh liên quan</span>
-                            <div class="modal__preview-images">
-                                <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                                    alt="image scammer">
-                                <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                                    alt="image scammer">
-                                <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                                    alt="image scammer">
-                                <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                                    alt="image scammer">
-                                <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                                    alt="image scammer">
-                            </div>
-                        </div>
-                    </div>
+    <!-- MODAL XEM NHANH 1 SCAMMER (chỉ ở mục "Hôm nay"; có link sang scammerDetail.html?id=...) -->
+    <div class="modal" id="quickViewModal" hidden>
+        <div class="modal__overlay" data-close-quickview></div>
+        <div class="modal__content">
+            <div class="modal__header">
+                <span class="modal__header-title">Chi tiết tố cáo</span>
+                <div class="modal__header-close" data-close-quickview>
+                    <img src="./assets/images/close-icon.svg" alt="đóng">
                 </div>
             </div>
-        </section>
-        <!-- End MODAL DETAIL SCAMMER -->
+            <div class="modal__body" id="quickViewBody"></div>
+        </div>
     </div>
+    <!-- END MODAL XEM NHANH -->
+
     <!-- JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.9.0/lightgallery.min.js"></script>
+    <script src="https://unpkg.com/axios@1.13.2/dist/axios.min.js"></script>
+    <script src="./assets/js/app.js"></script>
+    <script src="./assets/js/scammer-data.js"></script>
+    <script src="./assets/js/auth.js"></script>
+    <script src="./assets/js/header-nav.js"></script>
     <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/search.js"></script>
+    <script src="./assets/js/hero.js"></script>
+    <script src="./assets/js/reveal.js"></script>
     <!-- End JS -->
+    <script src="./assets/js/fx.js"></script>
 </body>
 
 </html>

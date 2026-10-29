@@ -2,6 +2,8 @@
     --bgColor: #020617;
     --bgColor2: rgba(18, 22, 39, 0.8);
     --bgColor3: rgba(255, 255, 255, 0.05);
+    --bgColor4: rgba(18, 22, 39, 1);
+    --redColor: rgba(219, 40, 40, 1);
     --textColor: #FFFFFF;
     --subTextColor: #94A3B8;
     --gradientColor: linear-gradient(270.33deg, #D9C4AF -70.15%, #FFFFFF 97.57%);
@@ -9,11 +11,33 @@
 
 }
 
+/* Cuộn mượt khi bấm vào link neo (vd header "Giới thiệu" -> #gioi-thieu ở
+   index.html) thay vì nhảy khựng 1 phát tới nơi. Tắt theo
+   prefers-reduced-motion để tôn trọng lựa chọn "giảm chuyển động" của
+   người dùng, giống các hiệu ứng khác trên trang. */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+/* Luôn chừa chỗ cho thanh cuộn dọc (kể cả khi trang đủ ngắn để không cần
+   cuộn) - nếu không, mỗi lần chuyển tab/trang mà chiều cao nội dung đổi
+   (có thanh cuộn hay không) thì bề rộng khả dụng của viewport đổi theo,
+   khiến mọi thứ được căn giữa (.container, .my-reports__account-box...)
+   bị xê dịch ngang vài px giữa các tab - đúng kiểu "lệch" chập chờn khó
+   chịu mà không phải do CSS của riêng khung nào sai cả. */
+html {
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+}
+
 body {
     font-family: "Montserrat", sans-serif;
     background-color: var(--bgColor);
     color: var(--textColor);
     font-size: 16px;
+    isolation: isolate;
 }
 
 .container {
@@ -23,6 +47,51 @@ body {
     padding-bottom: 100px;
 }
 
+/* TOAST STYLE */
+.fui-toast-body {
+   color: var(--textBtnColor);
+}
+/* end TOAST STYLE */
+
+/* ERROR MESSAGE STYLE */
+.form-message {
+    color: var(--redColor);
+    font-size: 14px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+/* END ERROR MESSAGE STYLE */
+
+
+/* EFFECT CIRCLE */
+.effect-circle-1 {
+    width: 530px;
+    height: 530px;
+    border-radius: 100%;
+    filter: blur(250px);
+    background-color: rgba(27, 29, 48, 1);
+    position: fixed;
+    top: 4px;
+    left: -57px;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.effect-circle-2 {
+    width: 530px;
+    height: 530px;
+    border-radius: 100%;
+    filter: blur(250px);
+    background-color: rgba(27, 29, 48, 1);
+    position: fixed;
+    bottom: 4px;
+    right: -57px;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+/* END EFFECT CIRCLE */
 /* Button Styles */
 .btn {
     padding: 12px 20px;
@@ -54,11 +123,41 @@ body {
     margin-top: 25px;
     margin-inline: 6%;
     background-color: var(--bgColor2);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 40px;
+    padding: 14px 40px;
+    position: relative;
+    z-index: 25;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.header.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    margin-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    animation: fadeDown2 linear 0.3s;
+}
+
+@keyframes fadeDown2 {
+    from {
+        transform: translateY(-200%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .header__logo {
@@ -80,22 +179,374 @@ body {
 }
 
 .header__nav-link {
+    position: relative;
+    display: inline-block;
     color: var(--subTextColor);
     font-weight: 500;
-    transition: ease 0.2s;
+    transition: color ease 0.2s;
+    padding-bottom: 2px;
 }
 
-.header__nav-link.active {
-    color: var(--textColor);
-    font-weight: 600;
+.header__nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 100%;
+    height: 2px;
+    border-radius: 100px;
+    background: var(--gradientColor);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform ease 0.25s;
 }
 
+.header__nav-link.active,
 .header__nav-link:hover {
     color: var(--textColor);
     font-weight: 600;
 }
 
+.header__nav-link.active::after,
+.header__nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+/* Nút hamburger - chỉ hiện trên màn hình hẹp (xem @media bên dưới) */
+.header__burger {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    color: var(--textColor);
+    cursor: pointer;
+    transition: ease 0.2s;
+}
+
+.header__burger:hover {
+    background-color: var(--bgColor3);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.header__burger svg {
+    pointer-events: none;
+}
+
+.header__burger-icon-close {
+    display: none;
+}
+
+.header__burger[aria-expanded="true"] .header__burger-icon-open {
+    display: none;
+}
+
+.header__burger[aria-expanded="true"] .header__burger-icon-close {
+    display: block;
+}
+
+/* Đăng nhập / tài khoản ở header (dùng chung mọi trang công khai) */
+.header__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.header__account {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header__auth-link {
+    color: var(--subTextColor);
+    font-weight: 500;
+    font-size: 15px;
+    text-decoration: none;
+    transition: ease 0.2s;
+}
+
+.header__auth-link:hover {
+    color: var(--textColor);
+}
+
+.header__auth-link--name {
+    color: var(--textColor);
+    font-weight: 600;
+}
+
+/* Link "Trang quản trị" chỉ hiện khi đăng nhập bằng tài khoản role=admin,
+   để admin đang xem web công khai có đường quay lại admin.html. */
+.header__auth-link--admin {
+    background-color: rgba(219, 40, 40, 0.15);
+    color: var(--redColor);
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 100px;
+    border: 1px solid rgba(219, 40, 40, 0.35);
+}
+
+.header__auth-link--admin:hover {
+    background-color: rgba(219, 40, 40, 0.3);
+    color: var(--redColor);
+}
+
+.header__logout-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 100px;
+    color: var(--subTextColor);
+    font-family: inherit;
+    font-size: 13px;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: ease 0.2s;
+}
+
+.header__logout-btn:hover {
+    color: var(--textColor);
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+/* RESPONSIVE: dưới 880px thu menu vào hamburger để tránh tràn ngang */
+@media (max-width: 880px) {
+    .header {
+        margin-inline: 4%;
+        padding: 12px 18px;
+    }
+
+    .header_nav-list {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 18px;
+        right: 18px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        background-color: var(--bgColor4);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 10px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-8px);
+        transition: opacity ease 0.2s, transform ease 0.2s, visibility 0.2s;
+        z-index: 30;
+    }
+
+    .header_nav-list.is-open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .header_nav--item {
+        width: 100%;
+    }
+
+    .header__nav-link {
+        display: block;
+        padding: 10px 12px;
+        border-radius: 10px;
+    }
+
+    .header__nav-link::after {
+        display: none;
+    }
+
+    .header__nav-link.active,
+    .header__nav-link:hover {
+        background-color: var(--bgColor3);
+    }
+
+    .header__burger {
+        display: inline-flex;
+    }
+}
+
+@media (max-width: 560px) {
+    .header {
+        padding: 10px 14px;
+    }
+
+    .header_logo-name {
+        font-size: 16px;
+    }
+
+    .header__btn {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+
+    .header__actions {
+        gap: 10px;
+    }
+
+    .header__account {
+        gap: 8px;
+    }
+
+    .header__auth-link--name {
+        max-width: 84px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .header__auth-link--admin {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+}
+
 /* End Header Styles */
+
+/* ============================================================
+   HIỆU ỨNG CHUYỂN TRANG (View Transitions API - điều hướng multi-page).
+   Chỉ cần khai báo, KHÔNG cần JS: mỗi trang đã có
+   <meta name="view-transition" content="same-origin"> trong <head>, trình
+   duyệt (Chrome/Edge) sẽ tự chụp ảnh trang cũ/mới rồi mờ dần (crossfade)
+   qua nhau khi bấm link sang trang khác cùng site. Trình duyệt chưa hỗ trợ
+   (Firefox/Safari cũ) thì tự động bỏ qua, chuyển trang bình thường, không
+   lỗi gì cả.
+   ============================================================ */
+@media (prefers-reduced-motion: no-preference) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        animation-duration: 0.28s;
+        animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(root) {
+        animation: none !important;
+    }
+}
+/* END HIỆU ỨNG CHUYỂN TRANG */
+
+/* ============================================================
+   ANIMATION "HIỆN DẦN KHI CUỘN TỚI" DÙNG CHUNG CHO CÁC TRANG - gắn class
+   .reveal-up-scroll vào khối muốn có hiệu ứng, assets/js/reveal.js (dùng
+   IntersectionObserver) sẽ thêm class "is-visible" đúng lúc khối đó cuộn
+   vào gần viewport. Khối nằm ngay trong màn hình đầu (không cần cuộn) thì
+   hiện gần như ngay lập tức. Muốn nhiều khối con so le nhau thì thêm inline
+   style="transition-delay:.08s" (tăng dần) ngay trên phần tử đó.
+   Tự tắt hẳn nếu người dùng bật "giảm chuyển động", hoặc nếu vì lý do gì
+   đó JS không chạy được thì nội dung vẫn hiện bình thường (không bị kẹt mờ
+   mãi) nhờ script gắn "is-visible" ngay cả khi trình duyệt không hỗ trợ
+   IntersectionObserver - xem reveal.js.
+   ============================================================ */
+@media (prefers-reduced-motion: no-preference) {
+    .reveal-up-scroll {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-up-scroll.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Nhấc nhẹ + đổ bóng khi hover - dùng cho card/khối nội dung chính, đồng bộ
+   cảm giác với các thẻ ở hero/trang cá nhân. */
+.lift-hover {
+    transition: transform ease 0.25s, box-shadow ease 0.25s, border-color ease 0.25s;
+}
+
+.lift-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+/* END ANIMATION ENTRANCE DÙNG CHUNG */
+
+/* ============================================================
+   HỆ ANIMATION "RISE / LIFT / SETTLE" DÙNG CHUNG (giống hero) - gắn class
+   .reveal-el kèm data-reveal="rise|lift|settle" lên tiêu đề/card ở các
+   trang khác để dùng chung ngôn ngữ chuyển động với hero. Khác với hero
+   (animation chạy ngay khi tải trang), ở đây animation chỉ chạy khi phần
+   tử cuộn tới gần viewport - reveal.js (IntersectionObserver) thêm class
+   "is-visible" đúng lúc, dùng lại đúng các @keyframes heroRise/heroLift/
+   heroSettle bên dưới (chép từ hero.css) để đồng bộ cảm giác trên mọi
+   trang kể cả những trang không nạp hero.css.
+   Muốn nhiều phần tử so le nhau thì thêm inline style="animation-delay:.08s"
+   (tăng dần) ngay trên phần tử đó.
+   An toàn: nếu giảm chuyển động hoặc JS không gắn được "is-visible" (lỗi/
+   trình duyệt cũ), phần tử KHÔNG bị kẹt mờ - opacity:0 chỉ áp dụng trong
+   nhánh prefers-reduced-motion:no-preference, còn reveal.js luôn có nhánh
+   dự phòng gắn is-visible ngay lập tức khi thiếu IntersectionObserver.
+   ============================================================ */
+@media (prefers-reduced-motion: no-preference) {
+    .reveal-el[data-reveal] {
+        opacity: 0;
+    }
+
+    .reveal-el[data-reveal].is-visible {
+        animation-duration: 0.75s;
+        animation-timing-function: cubic-bezier(0.22, 0.7, 0.25, 1);
+        animation-fill-mode: both;
+    }
+
+    .reveal-el[data-reveal="rise"].is-visible {
+        animation-name: heroRise;
+        animation-duration: 0.85s;
+        animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-el[data-reveal="lift"].is-visible {
+        animation-name: heroLift;
+    }
+
+    .reveal-el[data-reveal="settle"].is-visible {
+        animation-name: heroSettle;
+        animation-duration: 0.8s;
+        animation-timing-function: cubic-bezier(0.2, 0.75, 0.28, 1);
+    }
+}
+
+@keyframes heroRise {
+    from {
+        opacity: 0;
+        clip-path: inset(100% 0 -20% 0);
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        clip-path: inset(-20% 0 -20% 0);
+        transform: translateY(0);
+    }
+}
+
+@keyframes heroLift {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heroSettle {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+/* END HỆ ANIMATION RISE/LIFT/SETTLE DÙNG CHUNG */
+/* END HIỆU ỨNG CHUYỂN TRANG */
 
 /* MODAL STYLE */
 .modal {
@@ -109,6 +560,28 @@ body {
     justify-content: center;
     align-items: center;
     isolation: isolate;
+    z-index: 9999;
+    animation: fadeIn ease 0.3s;
+}
+
+/* Quan trọng: thuộc tính HTML "hidden" chỉ ẩn phần tử nhờ rule mặc định
+   của trình duyệt [hidden] { display: none }. Vì .modal ở trên tự đặt
+   display: flex, rule của trình duyệt bị đè và modal.hidden = true KHÔNG
+   thực sự ẩn modal đi (nó vẫn hiện, chỉ là rỗng nội dung). Rule dưới đây
+   ghi đè lại display: none mỗi khi phần tử có thuộc tính hidden, để việc
+   đóng modal (element.hidden = true) hoạt động đúng. */
+.modal[hidden] {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .modal__overlay {
@@ -127,6 +600,19 @@ body {
     background-color: var(--bgColor2);
     border-radius: 16px;
     backdrop-filter: blur(70px);
+    animation: fadeDown ease 0.3s;
+}
+
+@keyframes fadeDown {
+    from {
+        transform: translateY(-10%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .modal__header {
@@ -152,6 +638,11 @@ body {
     align-items: center;
     cursor: pointer;
     transition: ease 0.2s;
+}
+
+.modal__header-close>* {
+    pointer-events: none;
+    cursor: pointer;
 }
 
 .modal__header-close:hover {
@@ -213,6 +704,11 @@ body {
     font-weight: 500;
 }
 
+.modal__detail-text--highlight {
+    color: var(--redColor);
+    font-weight: 700;
+}
+
 .modal__textarea-content {
     margin-top: 4px;
 }
@@ -230,6 +726,7 @@ body {
 
 .modal__preview-images img {
     height: 237px;
+    width: 100%;
     object-fit: cover;
     border-radius: 8px;
     cursor: pointer;

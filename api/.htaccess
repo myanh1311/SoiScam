@@ -1,0 +1,4 @@
+# Không cho tải trực tiếp file SQL / mẫu cấu hình qua web
+<FilesMatch "\.(sql|md|example\.php)$">
+    Require all denied
+</FilesMatch>

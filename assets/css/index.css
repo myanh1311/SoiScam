@@ -1,3 +1,22 @@
+/* IMAGES FIXED STYLES */
+.images-fixed{
+    position: fixed;
+    top: 400px;
+    left: 50%;
+    right: 0;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+}
+.image-shield{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+/* END IMAGES FIXED STYLES */
+/* CONTENT STYLES */
 .content {
     max-width: 664px;
     width: 100%;
@@ -21,8 +40,8 @@
     text-align: center;
 }
 
-.form__search {
-    max-width: 1000px;
+.form-search {
+    max-width: 500px;
     width: 100%;
     border-radius: 16px;
     background-color: var(--bgColor3);
@@ -32,6 +51,11 @@
     align-items: center;
     padding: 5px;
     margin-inline: auto;
+    position: relative;
+}
+
+.form-search__custom {
+    margin-top: 60px;
 }
 
 .form-search__input {
@@ -47,15 +71,103 @@
 .form-search__btn {
     flex-shrink: 0;
 }
+/* END CONTENT STYLES */
+
+/* SEARCH RESULTS DROPDOWN */
+.search-results {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    background-color: var(--bgColor4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 8px;
+    max-height: 340px;
+    overflow-y: auto;
+    z-index: 30;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+}
+
+.search-results__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: ease 0.2s;
+}
+
+.search-results__item:hover {
+    background-color: var(--bgColor3);
+}
+
+.search-results__item > * {
+    pointer-events: none;
+}
+
+.search-results__avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.search-results__info {
+    min-width: 0;
+}
+
+.search-results__name {
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.search-results__meta {
+    color: var(--subTextColor);
+    font-size: 13px;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.search-results__state {
+    padding: 20px 12px;
+    text-align: center;
+    color: var(--subTextColor);
+    font-size: 14px;
+}
+
+.search-results mark {
+    background: transparent;
+    color: #D9C4AF;
+    font-weight: 700;
+}
+
+/* END SEARCH RESULTS DROPDOWN */
+
 
 /* SCAMMER LIST */
 .alert-scam {
     margin-top: 138px;
-    background-color: var(--bgColor2);
+    /* Chất liệu kính mờ đồng bộ với .hero__panel (index.html) */
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
+    box-shadow:
+        inset 1px 1px 0 rgba(255, 255, 255, 0.08),
+        0 30px 60px rgba(0, 0, 0, 0.35);
     border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
 }
-
+.alert-scam__custom {
+    margin-top: 60px;
+}
 .alert-scam__header {
     padding: 16px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -75,7 +187,21 @@
     gap: 20px;
 }
 
-.scammer__item {
+/* Không có thẻ nào (chỉ 1 dòng chữ .scammer__state) - bỏ padding lớn
+   dành cho lưới 3 cột thẻ, tránh cả khối phồng to trống trải so với
+   nội dung bên trong ("trên to dưới nhỏ"). */
+.scammer__list--empty {
+    padding: 28px 30px;
+}
+
+.scammer__state {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--subTextColor);
+    padding: 20px 0;
+}
+
+.scammer__item-link {
     background-color: var(--bgColor3);
     border-radius: 16px;
     padding: 16px;
@@ -87,23 +213,59 @@
     position: relative;
     isolation: isolate;
     overflow: hidden;
+    color: inherit;
+}
+
+.scammer__item-link > * {
+    pointer-events: none;
+}
+
+.scammer__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.scammer__info {
+    min-width: 0;
+    flex: 1;
 }
 
 .scammer__name {
     font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .scammer__date {
     color: var(--subtextColor);
 }
 
-.scammer__item:hover::before {
+.scammer__badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--redColor);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 5px 8px;
+    border-radius: 100px;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+.scammer__item-link:hover::before {
     left: auto;
     right: 0;
     width: 100%;
 }
 
-.scammer__item::before {
+.scammer__item-link::before {
     content: "";
     position: absolute;
     left: 0;
@@ -117,7 +279,184 @@
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
+/* BỘ LỌC + SẮP XẾP (trang Scamer) */
+.scammer-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 20px 30px 0;
+}
+
+.scammer-filter__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--subTextColor);
+}
+
+.scammer-filter__item select {
+    background-color: var(--bgColor3);
+    color: var(--textColor);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 9px 14px;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    color-scheme: dark;
+    transition: border-color 0.2s ease;
+}
+
+/* Danh sách xổ xuống cần nền riêng: nền của ô chọn trong suốt nên trình duyệt vẽ nền trắng, chữ trắng bị chìm */
+.scammer-filter__item select option {
+    background-color: #151a2c;
+    color: #ffffff;
+}
+
+.scammer-filter__item select:hover,
+.scammer-filter__item select:focus {
+    border-color: rgba(255, 255, 255, 0.3);
+    outline: none;
+}
+
+/* Có bộ lọc ngay phía trên thì lưới thẻ bớt padding trên */
+.scammer-filter + .scammer__list {
+    padding-top: 24px;
+}
+/* End BỘ LỌC */
+
 /* End SCAMMER LIST */
+
+/* SCAMMER DETAIL PAGE */
+.scammer-detail {
+    margin-top: 138px;
+    margin-bottom: 60px;
+    /* Thẻ kính mờ bọc quanh toàn bộ nội dung chi tiết scammer (trước đây
+       không có nền/khung gì cả) - đồng bộ chất liệu với .hero__panel
+       (index.html). */
+    padding: 24px clamp(16px, 4vw, 28px);
+    border-radius: 20px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
+    box-shadow:
+        inset 1px 1px 0 rgba(255, 255, 255, 0.08),
+        0 30px 60px rgba(0, 0, 0, 0.35);
+}
+
+.scammer-detail__loading {
+    text-align: center;
+    color: var(--subTextColor);
+    padding: 60px 0;
+}
+
+.scammer-detail__profile {
+    /* Chất liệu kính mờ đồng bộ với .hero__panel (index.html) */
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
+    box-shadow:
+        inset 1px 1px 0 rgba(255, 255, 255, 0.08),
+        0 30px 60px rgba(0, 0, 0, 0.35);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.scammer-detail__avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.scammer-detail__info {
+    flex: 1;
+    min-width: 200px;
+}
+
+.scammer-detail__name {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.scammer-detail__meta {
+    color: var(--subTextColor);
+    margin-top: 8px;
+}
+
+.scammer-detail__meta span {
+    color: var(--textColor);
+    font-weight: 600;
+}
+
+.scammer-detail__badge {
+    background-color: var(--redColor);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 100px;
+    white-space: nowrap;
+}
+
+.scammer-detail__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+
+.scammer-detail__action-btn {
+    background: var(--gradientColor);
+    color: var(--textBtnColor);
+    border: none;
+    border-radius: 100px;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: ease 0.2s;
+}
+
+.scammer-detail__action-btn:hover {
+    opacity: 0.9;
+}
+
+.scammer-detail__action-btn--outline {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--textColor);
+}
+
+.scammer-detail__reports {
+    margin-top: 40px;
+}
+
+.scammer-detail__reports-title {
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 16px;
+}
+
+.scammer-detail__reports-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+/* END SCAMMER DETAIL PAGE */
 
 /* WARNING STYLE */
 .warning {
@@ -180,5 +519,7 @@
     transform: rotate(90deg);
     transition: transform ease 0.2s;
 }
-
 /* END WARNING STYLE */
+
+/* Mục "Giới thiệu" giờ là 1 trang riêng (gioi-thieu.html, CSS riêng ở
+   assets/css/gioi-thieu.css) thay vì 1 section neo ở cuối trang chủ. */

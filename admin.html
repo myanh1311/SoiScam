@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="view-transition" content="same-origin">
+    <title>SOISCAM - Quản trị</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/admin.css">
+</head>
+
+<body>
+    <!-- IMAGES FIXED (đồng bộ hiệu ứng ánh sáng nền với các trang công khai) -->
+    <div class="effect-circle-1"></div>
+    <div class="effect-circle-2"></div>
+    <!-- END IMAGES FIXED-->
+    <!-- Trang này chỉ cho tài khoản role "admin" (server kiểm tra, xem api/auth.php và admin.js) -->
+
+    <!-- ADMIN SHELL (sidebar + nội dung) -->
+    <div id="adminShell" class="admin-shell" hidden>
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar__brand">
+                <img src="./assets/images/logo.png" alt="logo" class="admin-sidebar__logo">
+                <span>Soi scam</span>
+            </div>
+            <nav class="admin-sidebar__nav">
+                <button type="button" class="admin-sidebar__link active" data-view="stats">
+                    <span class="admin-sidebar__icon">📊</span>
+                    <span>Thống kê</span>
+                </button>
+                <button type="button" class="admin-sidebar__link" data-view="list">
+                    <span class="admin-sidebar__icon">👥</span>
+                    <span>Danh sách Scammer</span>
+                </button>
+                <button type="button" class="admin-sidebar__link" data-view="pending">
+                    <span class="admin-sidebar__icon">⏳</span>
+                    <span>Đợi duyệt</span>
+                    <span id="pendingBadge" class="admin-sidebar__badge" hidden>0</span>
+                </button>
+                <button type="button" class="admin-sidebar__link" data-view="accounts">
+                    <span class="admin-sidebar__icon">👤</span>
+                    <span>Quản lý tài khoản</span>
+                </button>
+                <a href="index.html" target="_blank" rel="noopener" class="admin-sidebar__link">
+                    <span class="admin-sidebar__icon">🌐</span>
+                    <span>Vào website</span>
+                </a>
+            </nav>
+        </aside>
+
+        <div class="admin-main">
+            <header class="admin-topbar">
+                <h1 class="admin-topbar__title" id="adminViewTitle">Thống kê tổng quan</h1>
+                <div class="admin-profile">
+                    <img src="./assets/images/avatar-2.png" alt="admin" class="admin-profile__avatar">
+                    <span id="adminProfileName">Admin</span>
+                    <button type="button" id="adminLogoutBtn" class="admin-profile__logout">Đăng xuất</button>
+                </div>
+            </header>
+
+            <div class="admin-content">
+                <!-- VIEW: THỐNG KÊ TỔNG QUAN -->
+                <section class="admin-view" id="view-stats">
+                    <div class="admin-stats__cards" id="statsCards">
+                        <div class="admin-stat-card reveal-el" data-reveal="settle">
+                            <span class="admin-stat-card__label">Tổng hồ sơ scammer</span>
+                            <span class="admin-stat-card__value" id="statTotalScammers">–</span>
+                        </div>
+                        <div class="admin-stat-card reveal-el" data-reveal="settle" style="animation-delay:.06s">
+                            <span class="admin-stat-card__label">Tố cáo đã duyệt</span>
+                            <span class="admin-stat-card__value" id="statApprovedReports">–</span>
+                        </div>
+                        <div class="admin-stat-card reveal-el" data-reveal="settle" style="animation-delay:.12s">
+                            <span class="admin-stat-card__label">Đang chờ duyệt</span>
+                            <span class="admin-stat-card__value" id="statPendingReports">–</span>
+                        </div>
+                        <div class="admin-stat-card reveal-el" data-reveal="settle" style="animation-delay:.18s">
+                            <span class="admin-stat-card__label">Tài khoản người dùng</span>
+                            <span class="admin-stat-card__value" id="statTotalUsers">–</span>
+                        </div>
+                        <div class="admin-stat-card admin-stat-card--accent reveal-el" data-reveal="settle" style="animation-delay:.24s">
+                            <span class="admin-stat-card__label">Tỷ lệ duyệt</span>
+                            <span class="admin-stat-card__value" id="statApprovalRate">–</span>
+                            <span class="admin-stat-card__sub" id="statApprovalSub"></span>
+                        </div>
+                    </div>
+
+                    <div class="admin-stats__chart-box">
+                        <h2 class="admin-view__title">Số tố cáo gửi lên theo ngày (30 ngày gần nhất)</h2>
+                        <canvas id="statsTimelineChart" height="90"></canvas>
+                    </div>
+                </section>
+
+                <!-- VIEW: DANH SÁCH SCAMMER (đơn đã duyệt) -->
+                <section class="admin-view" id="view-list" hidden>
+                    <div class="admin-view__header">
+                        <h2 class="admin-view__title">Danh sách scammer <span id="listCountLabel" class="admin-view__count">(có 0 đơn tố cáo)</span></h2>
+                        <div class="admin-search">
+                            <input type="text" id="adminSearchInput" class="admin-search__input" placeholder="Tìm kiếm tên, số tài khoản...">
+                            <span class="admin-search__icon">🔍</span>
+                        </div>
+                    </div>
+                    <div class="admin-batch-bar" id="listBatchBar" hidden>
+                        <span id="listSelectedCount">Đã chọn 0</span>
+                        <button type="button" class="admin-batch-bar__btn admin-batch-bar__btn--danger" data-batch-action="reject" data-batch-scope="list">Xoá đã chọn</button>
+                    </div>
+                    <div class="admin-table-wrap">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" class="admin-select-all" data-scope="list"></th>
+                                    <th>id</th>
+                                    <th>Chủ tài khoản</th>
+                                    <th>Số tài khoản</th>
+                                    <th>Ngân hàng</th>
+                                    <th>Sđt đối tượng</th>
+                                    <th>Người gửi đơn</th>
+                                    <th>Ngày gửi</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listTableBody">
+                                <tr><td colspan="9" class="admin-table__state">Đang tải dữ liệu...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="admin-pagination" id="listPagination"></div>
+                </section>
+
+                <!-- VIEW: ĐỢI DUYỆT -->
+                <section class="admin-view" id="view-pending" hidden>
+                    <div class="admin-view__header">
+                        <h2 class="admin-view__title">Đợi duyệt <span id="pendingCountLabel" class="admin-view__count">(có 0 tố cáo chờ duyệt)</span></h2>
+                    </div>
+                    <div class="admin-batch-bar" id="pendingBatchBar" hidden>
+                        <span id="pendingSelectedCount">Đã chọn 0</span>
+                        <button type="button" class="admin-batch-bar__btn admin-batch-bar__btn--approve" data-batch-action="approve" data-batch-scope="pending">Duyệt đã chọn</button>
+                        <button type="button" class="admin-batch-bar__btn admin-batch-bar__btn--danger" data-batch-action="reject" data-batch-scope="pending">Từ chối đã chọn</button>
+                    </div>
+                    <div class="admin-table-wrap">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" class="admin-select-all" data-scope="pending"></th>
+                                    <th>id</th>
+                                    <th>Chủ tài khoản</th>
+                                    <th>Số tài khoản</th>
+                                    <th>Ngân hàng</th>
+                                    <th>Sđt đối tượng</th>
+                                    <th>Người gửi đơn</th>
+                                    <th>Ngày gửi</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pendingTableBody">
+                                <tr><td colspan="9" class="admin-table__state">Đang tải dữ liệu...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="admin-pagination" id="pendingPagination"></div>
+                </section>
+
+                <!-- VIEW: QUẢN LÝ TÀI KHOẢN (bảng "users" trên MySQL - user thường + admin) -->
+                <section class="admin-view" id="view-accounts" hidden>
+                    <div class="admin-view__header">
+                        <h2 class="admin-view__title">Quản lý tài khoản <span id="accountsCountLabel" class="admin-view__count">(có 0 tài khoản)</span></h2>
+                        <div class="admin-view__header-actions">
+                            <div class="admin-search">
+                                <input type="text" id="accountsSearchInput" class="admin-search__input" placeholder="Tìm tên, tên đăng nhập, email...">
+                                <span class="admin-search__icon">🔍</span>
+                            </div>
+                            <select id="accountsRoleFilter" class="admin-select-filter">
+                                <option value="all">Tất cả quyền</option>
+                                <option value="admin">Admin</option>
+                                <option value="user">Người dùng</option>
+                            </select>
+                            <button type="button" id="accountsExportBtn" class="admin-export-btn">⬇️ Xuất Excel</button>
+                        </div>
+                    </div>
+
+                    <div class="admin-stats__cards" id="accountsStatsCards">
+                        <div class="admin-stat-card reveal-el" data-reveal="settle">
+                            <span class="admin-stat-card__label">Tổng tài khoản</span>
+                            <span class="admin-stat-card__value" id="statAccTotal">–</span>
+                        </div>
+                        <div class="admin-stat-card reveal-el" data-reveal="settle" style="animation-delay:.06s">
+                            <span class="admin-stat-card__label">Admin</span>
+                            <span class="admin-stat-card__value" id="statAccAdmins">–</span>
+                        </div>
+                        <div class="admin-stat-card reveal-el" data-reveal="settle" style="animation-delay:.12s">
+                            <span class="admin-stat-card__label">Người dùng thường</span>
+                            <span class="admin-stat-card__value" id="statAccUsers">–</span>
+                        </div>
+                        <div class="admin-stat-card admin-stat-card--accent reveal-el" data-reveal="settle" style="animation-delay:.18s">
+                            <span class="admin-stat-card__label">Mới trong 7 ngày</span>
+                            <span class="admin-stat-card__value" id="statAccNewWeek">–</span>
+                        </div>
+                    </div>
+
+                    <div class="admin-table-wrap">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>Tài khoản</th>
+                                    <th>Email</th>
+                                    <th>Quyền</th>
+                                    <th>
+                                        <button type="button" id="sortByReportCountBtn" class="admin-table__sort-btn">Số tố cáo <span id="sortReportCountIcon">↕</span></button>
+                                    </th>
+                                    <th>Trạng thái</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="accountsTableBody">
+                                <tr><td colspan="8" class="admin-table__state">Đang tải dữ liệu...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- END ADMIN SHELL -->
+
+    <!-- MODAL XEM CHI TIẾT 1 ĐƠN TỐ CÁO (dùng chung cho cả 2 bảng) -->
+    <div class="modal" id="reportDetailModal" hidden>
+        <div class="modal__overlay" data-close-modal></div>
+        <div class="modal__content admin-detail-modal">
+            <div class="modal__header">
+                <span class="modal__header-title">Chi tiết tố cáo</span>
+                <div class="modal__header-close" data-close-modal>
+                    <img src="./assets/images/close-icon.svg" alt="đóng">
+                </div>
+            </div>
+            <div class="modal__body" id="reportDetailBody"></div>
+        </div>
+    </div>
+    <!-- END MODAL -->
+
+    <!-- MODAL TỪ CHỐI / XOÁ TỐ CÁO KÈM LÝ DO (gửi phản hồi cho người tố cáo nếu họ có tài khoản) -->
+    <div class="modal" id="rejectReasonModal" hidden>
+        <div class="modal__overlay" data-close-reject-modal></div>
+        <div class="modal__content admin-reject-modal">
+            <div class="modal__header">
+                <span class="modal__header-title">Từ chối / Xoá tố cáo</span>
+                <div class="modal__header-close" data-close-reject-modal>
+                    <img src="./assets/images/close-icon.svg" alt="đóng">
+                </div>
+            </div>
+            <div class="modal__body admin-reject-modal__body">
+                <p class="admin-reject-modal__desc" id="rejectModalDesc">
+                    Tố cáo sẽ bị xoá khỏi hệ thống. Nếu người gửi có tài khoản, lý do bạn ghi bên dưới sẽ được
+                    gửi vào mục "Tố cáo của tôi" của họ để họ biết vì sao tố cáo không được duyệt.
+                </p>
+                <label for="rejectReasonInput" class="admin-reject-modal__label">Lý do từ chối (không bắt buộc)</label>
+                <textarea id="rejectReasonInput" class="admin-reject-modal__textarea"
+                    placeholder="Ví dụ: Ảnh minh chứng không rõ ràng, thông tin chưa đủ căn cứ..."></textarea>
+                <div class="admin-reject-modal__actions">
+                    <button type="button" class="admin-reject-modal__back" data-close-reject-modal>← Quay lại</button>
+                    <button type="button" id="confirmRejectBtn" class="admin-reject-modal__confirm">Xác nhận xoá &amp; gửi phản hồi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END MODAL TỪ CHỐI -->
+
+    <!-- MODAL CHI TIẾT 1 TÀI KHOẢN (Quản lý tài khoản - xem các tố cáo của họ) -->
+    <div class="modal" id="accountDetailModal" hidden>
+        <div class="modal__overlay" data-close-account-modal></div>
+        <div class="modal__content admin-detail-modal admin-account-modal">
+            <div class="modal__header">
+                <span class="modal__header-title">Chi tiết tài khoản</span>
+                <div class="modal__header-close" data-close-account-modal>
+                    <img src="./assets/images/close-icon.svg" alt="đóng">
+                </div>
+            </div>
+            <div class="modal__body" id="accountDetailBody"></div>
+        </div>
+    </div>
+    <!-- END MODAL CHI TIẾT TÀI KHOẢN -->
+
+    <p id="adminStatusMsg" class="admin-status" hidden></p>
+
+    <!-- JS -->
+    <script src="https://unpkg.com/axios@1.13.2/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+    <!-- SheetJS (thư viện "xlsx") - dùng để xuất danh sách tài khoản ra
+         file Excel (.xlsx) thật thay vì .csv như trước. Nạp trước
+         admin.js (thẻ <script> thường, không async/defer nên chạy tuần
+         tự đúng thứ tự khai báo) để biến toàn cục XLSX có sẵn khi
+         admin.js gọi tới. -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="./assets/js/scammer-data.js"></script>
+    <script src="./assets/js/auth.js"></script>
+    <script src="./assets/js/admin.js"></script>
+    <!-- End JS -->
+</body>
+
+</html>

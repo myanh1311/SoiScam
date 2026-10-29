@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="view-transition" content="same-origin">
+    <title>SOISCAM - Tố cáo của tôi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/fx.css">
+    <link rel="stylesheet" href="./assets/css/index.css">
+    <link rel="stylesheet" href="./assets/css/report.css">
+    <link rel="stylesheet" href="./assets/css/my-reports.css">
+    <link rel="stylesheet" href="./assets/css/login.css">
+</head>
+
+<body>
+    <!-- IMAGES FIXED-->
+    <div class="effect-circle-1"></div>
+    <div class="effect-circle-2"></div>
+    <!-- END IMAGES FIXED-->
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="header__logo">
+            <img src="./assets/images/logo.png" alt="logo" class="header__logo-img">
+            <span class="header_logo-name">Soi scam</span>
+        </a>
+        <ul class="header_nav-list" id="headerNavList">
+            <li class="header_nav--item">
+                <a href="index.html" class="header__nav-link">Trang chủ</a>
+            </li>
+            <li class="header_nav--item">
+                <a href="./scammerList.html" class="header__nav-link">Scamer</a>
+            </li>
+            <li class="header_nav--item">
+                <a href="./report.html" class="header__nav-link">Gửi tố cáo</a>
+            </li>
+            <li class="header_nav--item">
+                <a href="./gioi-thieu.html" class="header__nav-link">Giới thiệu</a>
+            </li>
+        </ul>
+        <div class="header__actions">
+            <button type="button" class="header__burger" id="headerBurgerBtn" aria-label="Mở menu" aria-expanded="false" aria-controls="headerNavList">
+                <svg class="header__burger-icon-open" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                </svg>
+                <svg class="header__burger-icon-close" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                </svg>
+            </button>
+            <div id="headerAccount" class="header__account">
+                <a href="login.html" class="header__auth-link">Đăng nhập</a>
+            </div>
+        </div>
+    </header>
+    <!--End Header -->
+
+    <!-- BREADCRUM -->
+    <section class="breadcrumb">
+        <a href="index.html" class="breadcrumb__link">Trang chủ</a>
+        <img src="./assets/images/arrow-right-2.svg" alt="" class="breadcrumb__icon">
+        <span class="breadcrumb__link active">Tố cáo của tôi</span>
+    </section>
+    <!-- END BREADCRUM -->
+
+    <div class="container">
+        <section class="my-reports">
+            <!-- HỒ SƠ CÁ NHÂN: avatar chữ cái đầu + tên + huy hiệu uy tín -->
+            <div class="my-profile">
+                <span class="my-profile__avatar" id="myProfileAvatar">?</span>
+                <div class="my-profile__info">
+                    <h1 class="my-profile__name" id="myProfileName">–</h1>
+                    <p class="my-profile__meta">
+                        <span id="myProfileUsername">@...</span> · <span id="myProfileEmail"></span>
+                    </p>
+                    <span class="my-profile__badge" id="myProfileBadge" hidden></span>
+                </div>
+            </div>
+
+            <!-- DANH MỤC: bấm vào từng mục để chuyển qua đúng phần tương ứng
+                 (giống cách chuyển tab bên trang admin), thay vì hiện hết 1 lần.
+                 Thanh gạch chân (myMenuIndicator) sẽ tự trượt sang mục đang chọn. -->
+            <nav class="my-menu" id="myMenu">
+                <button type="button" class="my-menu__item active" data-my-view="overview">Tổng quan</button>
+                <button type="button" class="my-menu__item" data-my-view="reports">Tố cáo của tôi</button>
+                <button type="button" class="my-menu__item" data-my-view="profile">Sửa thông tin</button>
+                <button type="button" class="my-menu__item" data-my-view="password">Đổi mật khẩu</button>
+                <button type="button" class="my-menu__item my-menu__item--danger" data-my-view="danger">Xoá tài khoản</button>
+                <span class="my-menu__indicator" id="myMenuIndicator"></span>
+            </nav>
+
+            <p id="myReportsStatus" class="my-reports__inline-status" hidden></p>
+
+            <!-- MỤC: TỔNG QUAN -->
+            <div class="my-view" id="myView-overview">
+                <div class="my-stats__cards" id="myStatsCards">
+                    <div class="my-stat-card">
+                        <span class="my-stat-card__label">Tổng tố cáo đã gửi</span>
+                        <span class="my-stat-card__value" id="statMyTotal">–</span>
+                    </div>
+                    <div class="my-stat-card my-stat-card--approved">
+                        <span class="my-stat-card__label">Đã duyệt</span>
+                        <span class="my-stat-card__value" id="statMyApproved">–</span>
+                    </div>
+                    <div class="my-stat-card my-stat-card--pending">
+                        <span class="my-stat-card__label">Đang chờ duyệt</span>
+                        <span class="my-stat-card__value" id="statMyPending">–</span>
+                    </div>
+                    <div class="my-stat-card my-stat-card--rejected">
+                        <span class="my-stat-card__label">Bị từ chối</span>
+                        <span class="my-stat-card__value" id="statMyRejected">–</span>
+                    </div>
+                </div>
+
+                <div id="myNotifications" class="my-notifications" hidden>
+                    <div class="my-notifications__header">
+                        <h2 class="my-notifications__title">Phản hồi từ Admin</h2>
+                        <div class="my-notifications__filters" id="myNotificationsFilters">
+                            <button type="button" class="my-notifications__filter-btn active" data-filter="all">Tất cả</button>
+                            <button type="button" class="my-notifications__filter-btn" data-filter="approved">Đã duyệt</button>
+                            <button type="button" class="my-notifications__filter-btn" data-filter="rejected">Bị từ chối</button>
+                        </div>
+                    </div>
+                    <div id="myNotificationsList" class="my-notifications__list"></div>
+                </div>
+            </div>
+
+            <!-- MỤC: TỐ CÁO CỦA TÔI -->
+            <div class="my-view" id="myView-reports" hidden>
+                <h2 class="my-reports__title">Tố cáo của tôi</h2>
+                <p class="my-reports__desc">Danh sách các tố cáo bạn đã gửi khi đăng nhập, kèm trạng thái duyệt.</p>
+
+                <!-- TÌM KIẾM / LỌC TRẠNG THÁI TRONG DANH SÁCH TỐ CÁO CỦA TÔI -->
+                <div class="my-reports__filter-bar">
+                    <div class="my-reports__search">
+                        <input type="text" id="myReportsSearchInput" class="my-reports__search-input" placeholder="Tìm theo tên, số tài khoản, ngân hàng...">
+                        <svg class="my-reports__search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.4"/>
+                            <path d="M11.2 11.2 14.5 14.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <select id="myReportsStatusFilter" class="my-reports__status-filter">
+                        <option value="all">Tất cả trạng thái</option>
+                        <option value="approved">Đã duyệt</option>
+                        <option value="pending">Đang chờ duyệt</option>
+                    </select>
+                </div>
+
+                <div id="myReportsList" class="my-reports__list">
+                    <p class="my-reports__state">Đang tải dữ liệu...</p>
+                </div>
+            </div>
+
+            <!-- MỤC: SỬA THÔNG TIN -->
+            <div class="my-view" id="myView-profile" hidden>
+                <form id="editProfileForm" class="my-reports__account-box my-reports__account-form">
+                    <h2 class="my-notifications__title">Sửa thông tin cá nhân</h2>
+                    <div class="my-reports__field-row">
+                        <div class="login-box__field">
+                            <label for="editNameInput">Họ và tên</label>
+                            <input type="text" id="editNameInput" placeholder="Nhập họ và tên...">
+                        </div>
+                        <div class="login-box__field">
+                            <label for="editEmailInput">Email</label>
+                            <input type="email" id="editEmailInput" placeholder="Nhập email...">
+                        </div>
+                    </div>
+                    <p id="editProfileError" class="login-box__error"></p>
+                    <p id="editProfileSuccess" class="login-box__error login-box__error--success" hidden>Đã cập nhật thông tin!</p>
+                    <div class="my-profile__edit-actions">
+                        <button type="button" id="editProfileCancelBtn" class="my-reports__account-cancel-btn">Quay lại</button>
+                        <button type="submit" id="editProfileSubmitBtn" class="btn login-box__submit">Lưu thay đổi</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- MỤC: ĐỔI MẬT KHẨU -->
+            <div class="my-view" id="myView-password" hidden>
+                <div class="my-reports__account-box">
+                    <h2 class="my-notifications__title">Đổi mật khẩu</h2>
+                    <form id="changePasswordForm" class="my-reports__account-form">
+                        <div class="login-box__field">
+                            <label for="currentPasswordInput">Mật khẩu hiện tại</label>
+                            <input type="password" id="currentPasswordInput" autocomplete="current-password" placeholder="Nhập mật khẩu hiện tại...">
+                        </div>
+                        <div class="my-reports__field-row">
+                            <div class="login-box__field">
+                                <label for="newPasswordInput">Mật khẩu mới</label>
+                                <input type="password" id="newPasswordInput" autocomplete="new-password" placeholder="Ít nhất 6 ký tự...">
+                            </div>
+                            <div class="login-box__field">
+                                <label for="newPasswordConfirmInput">Nhập lại mật khẩu</label>
+                                <input type="password" id="newPasswordConfirmInput" autocomplete="new-password" placeholder="Nhập lại mật khẩu...">
+                            </div>
+                        </div>
+                        <p id="changePasswordError" class="login-box__error"></p>
+                        <p id="changePasswordSuccess" class="login-box__error login-box__error--success" hidden>Đổi mật khẩu thành công!</p>
+                        <button type="submit" id="changePasswordSubmitBtn" class="btn login-box__submit">Đổi mật khẩu</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- MỤC: XOÁ TÀI KHOẢN -->
+            <div class="my-view" id="myView-danger" hidden>
+                <div class="my-reports__account-box my-reports__danger-zone">
+                    <h2 class="my-notifications__title my-reports__danger-title">Xoá tài khoản</h2>
+                    <p class="my-reports__danger-desc">
+                        Xoá tài khoản sẽ xoá vĩnh viễn quyền đăng nhập của bạn. Các tố cáo đã gửi vẫn được giữ lại trên
+                        hệ thống để đảm bảo tính minh bạch, nhưng bạn sẽ không thể quản lý chúng nữa. Hành động này
+                        không thể hoàn tác.
+                    </p>
+                    <button type="button" id="deleteAccountBtn" class="my-reports__delete-account-btn">Xoá tài khoản của tôi</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- JS -->
+    <script src="https://unpkg.com/axios@1.13.2/dist/axios.min.js"></script>
+    <script src="./assets/js/scammer-data.js"></script>
+    <script src="./assets/js/auth.js"></script>
+    <script src="./assets/js/header-nav.js"></script>
+    <script src="./assets/js/my-reports.js"></script>
+    <script src="./assets/js/password-toggle.js"></script>
+    <!-- End JS -->
+    <script src="./assets/js/fx.js"></script>
+</body>
+
+</html>

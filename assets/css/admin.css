@@ -1,0 +1,962 @@
+/* ============================================================
+   ADMIN PAGE STYLES
+   ============================================================ */
+
+body {
+    margin: 0;
+}
+
+/* ============================================================
+   ADMIN SHELL (sidebar + nội dung chính)
+   ============================================================ */
+.admin-shell {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+.admin-sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.015));
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.admin-sidebar__brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 8px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.admin-sidebar__logo {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.admin-sidebar__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.admin-sidebar__link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: transparent;
+    border: none;
+    color: var(--subTextColor);
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    transition: ease 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.admin-sidebar__link:hover {
+    background-color: var(--bgColor3);
+    color: var(--textColor);
+}
+
+.admin-sidebar__link.active {
+    background: var(--gradientColor);
+    color: var(--textBtnColor);
+    font-weight: 600;
+}
+
+.admin-sidebar__icon {
+    font-size: 18px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.admin-sidebar__badge {
+    margin-left: auto;
+    background-color: var(--redColor);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 4px 8px;
+    border-radius: 100px;
+}
+
+/* MAIN AREA */
+.admin-main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 32px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background-color: var(--bgColor2);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+.admin-topbar__title {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.admin-profile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 100px;
+}
+
+.admin-profile__avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.admin-content {
+    padding: 28px 32px 60px;
+    flex: 1;
+}
+
+.admin-view__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.admin-view__title {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.admin-view__count {
+    color: var(--subTextColor);
+    font-weight: 500;
+    font-size: 15px;
+    margin-left: 4px;
+}
+
+.admin-placeholder {
+    background-color: var(--bgColor4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 40px;
+    color: var(--subTextColor);
+    text-align: center;
+}
+
+/* SEARCH BOX */
+.admin-search {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+}
+
+.admin-search__input {
+    width: 100%;
+    background-color: var(--bgColor4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 100px;
+    padding: 10px 40px 10px 18px;
+    color: var(--textColor);
+    outline: none;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.admin-search__icon {
+    position: absolute;
+    top: 50%;
+    right: 14px;
+    transform: translateY(-50%);
+    color: var(--subTextColor);
+    pointer-events: none;
+    font-size: 14px;
+}
+
+.admin-status {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background-color: var(--bgColor4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-size: 14px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+    z-index: 50;
+}
+
+.admin-status--error {
+    color: var(--redColor);
+}
+
+/* ADMIN TABLE */
+.admin-table-wrap {
+    background-color: var(--bgColor4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+}
+
+.admin-table th {
+    text-align: left;
+    color: var(--subTextColor);
+    font-weight: 600;
+    font-size: 13px;
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+}
+
+.admin-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    vertical-align: middle;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.admin-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.admin-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.admin-table__state {
+    text-align: center;
+    color: var(--subTextColor);
+    padding: 48px 0 !important;
+    white-space: normal;
+}
+
+.admin-table td:nth-child(2),
+.admin-table td:nth-child(3) {
+    color: #E4D2BC;
+    font-weight: 600;
+}
+
+/* Tên chủ tài khoản bấm được để mở chi tiết tố cáo */
+.admin-table__name-link {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    text-align: left;
+}
+
+.admin-table__name-link:hover {
+    text-decoration: underline;
+}
+
+.admin-table__actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Nút chữ "Chi tiết" trong cột Hành động */
+.admin-action-link {
+    background: transparent;
+    border: none;
+    color: var(--subTextColor);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: ease 0.2s;
+    white-space: nowrap;
+}
+
+.admin-action-link:hover {
+    background-color: var(--bgColor3);
+    color: var(--textColor);
+}
+
+.admin-icon-btn {
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    line-height: 1;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: ease 0.2s;
+}
+
+.admin-icon-btn:hover {
+    background-color: var(--bgColor3);
+}
+
+.admin-icon-btn--danger:hover {
+    background-color: rgba(219, 40, 40, 0.15);
+}
+
+.admin-icon-btn--approve:hover {
+    background-color: rgba(56, 176, 106, 0.2);
+}
+
+.admin-icon-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* DETAIL MODAL (dùng lại khung .modal / .modal__content của base.css) */
+.admin-detail-modal {
+    height: auto;
+    max-height: 85vh;
+    width: 560px;
+    max-width: calc(100vw - 32px);
+}
+
+.admin-detail-modal .modal__body {
+    height: auto;
+    max-height: calc(85vh - 54px);
+}
+
+.admin-detail-modal__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.admin-detail-modal__approve {
+    background-color: rgba(56, 176, 106, 0.15);
+    color: #4ADE80;
+    border: 1px solid rgba(74, 222, 128, 0.35);
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.admin-detail-modal__approve:hover {
+    background-color: rgba(56, 176, 106, 0.3);
+}
+
+.admin-detail-modal__reject {
+    background-color: rgba(219, 40, 40, 0.15);
+    color: var(--redColor);
+    border: 1px solid rgba(219, 40, 40, 0.35);
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.admin-detail-modal__reject:hover {
+    background-color: rgba(219, 40, 40, 0.3);
+}
+
+/* REJECT MODAL (từ chối / xoá tố cáo kèm lý do, dùng lại khung .modal) */
+.admin-reject-modal {
+    height: auto;
+    max-height: 85vh;
+    width: 520px;
+    max-width: calc(100vw - 32px);
+}
+
+.admin-reject-modal .modal__body {
+    height: auto;
+    max-height: calc(85vh - 54px);
+}
+
+.admin-reject-modal__body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.admin-reject-modal__desc {
+    color: var(--subTextColor);
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0 0 4px;
+}
+
+.admin-reject-modal__label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--textColor);
+}
+
+.admin-reject-modal__textarea {
+    width: 100%;
+    min-height: 110px;
+    resize: vertical;
+    background-color: var(--bgColor3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: var(--textColor);
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.admin-reject-modal__textarea:focus {
+    border-color: var(--redColor);
+}
+
+.admin-reject-modal__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.admin-reject-modal__back {
+    background: transparent;
+    color: var(--subTextColor);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: ease 0.2s;
+    margin-right: auto;
+}
+
+.admin-reject-modal__back:hover {
+    background-color: var(--bgColor3);
+    color: var(--textColor);
+}
+
+.admin-reject-modal__confirm {
+    background-color: rgba(219, 40, 40, 0.15);
+    color: var(--redColor);
+    border: 1px solid rgba(219, 40, 40, 0.35);
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: ease 0.2s;
+}
+
+.admin-reject-modal__confirm:hover {
+    background-color: rgba(219, 40, 40, 0.3);
+}
+
+.admin-reject-modal__confirm:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* TÀI KHOẢN NGƯỜI DÙNG: avatar chữ cái đầu tên, dùng trong bảng "Quản lý tài khoản" */
+.admin-account-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.admin-account-avatar {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    border-radius: 100%;
+    background: var(--gradientColor);
+    color: var(--textBtnColor);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* NÚT ĐĂNG XUẤT (topbar, cạnh tên admin) */
+.admin-profile__logout {
+    margin-left: 6px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--subTextColor);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 7px 14px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: ease 0.2s;
+}
+
+.admin-profile__logout:hover {
+    background-color: rgba(219, 40, 40, 0.15);
+    border-color: rgba(219, 40, 40, 0.35);
+    color: var(--redColor);
+}
+
+/* ============================================================
+   VIEW "THỐNG KÊ TỔNG QUAN" - thẻ số liệu + biểu đồ đường
+   ============================================================ */
+.admin-stats__cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.admin-stat-card {
+    /* Chất liệu kính mờ đồng bộ với .hero__panel (index.html) */
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
+    box-shadow:
+        inset 1px 1px 0 rgba(255, 255, 255, 0.08),
+        0 20px 40px rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.admin-stat-card__label {
+    color: var(--subTextColor);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.admin-stat-card__value {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.admin-stat-card__sub {
+    color: var(--subTextColor);
+    font-size: 12px;
+}
+
+.admin-stat-card--accent {
+    border-color: rgba(219, 40, 40, 0.35);
+    background: linear-gradient(160deg, rgba(219, 40, 40, 0.12), var(--bgColor4) 70%);
+}
+
+.admin-stat-card--accent .admin-stat-card__value {
+    color: var(--redColor);
+}
+
+.admin-stats__chart-box {
+    background-color: var(--bgColor4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.admin-stats__chart-box .admin-view__title {
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+/* ============================================================
+   THANH HÀNH ĐỘNG HÀNG LOẠT (hiện khi chọn >= 1 dòng bằng checkbox)
+   ============================================================ */
+.admin-batch-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: var(--bgColor4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 12px 18px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: var(--subTextColor);
+    flex-wrap: wrap;
+}
+
+/* Class display:flex ở trên "đè" mất display:none mặc định của thuộc tính
+   hidden (CSS tác giả luôn thắng CSS mặc định trình duyệt) - nếu không có
+   dòng này thì thanh hành động hàng loạt sẽ LUÔN hiện, kể cả khi chưa chọn
+   dòng nào (admin.js chỉ set bar.hidden = true khi selected.size === 0). */
+.admin-batch-bar[hidden] {
+    display: none;
+}
+
+.admin-batch-bar__btn {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: ease 0.2s;
+}
+
+.admin-batch-bar__btn--approve {
+    background-color: rgba(56, 176, 106, 0.15);
+    color: #4ADE80;
+    border-color: rgba(74, 222, 128, 0.35);
+}
+
+.admin-batch-bar__btn--approve:hover {
+    background-color: rgba(56, 176, 106, 0.3);
+}
+
+.admin-batch-bar__btn--danger {
+    background-color: rgba(219, 40, 40, 0.15);
+    color: var(--redColor);
+    border-color: rgba(219, 40, 40, 0.35);
+}
+
+.admin-batch-bar__btn--danger:hover {
+    background-color: rgba(219, 40, 40, 0.3);
+}
+
+/* Checkbox chọn dòng trong bảng */
+.admin-select-all,
+.admin-row-select {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--redColor);
+    cursor: pointer;
+}
+
+/* ============================================================
+   PHÂN TRANG (dưới mỗi bảng danh sách / đợi duyệt)
+   ============================================================ */
+.admin-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 18px;
+}
+
+.admin-pagination__btn {
+    background-color: var(--bgColor4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--textColor);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: ease 0.2s;
+}
+
+.admin-pagination__btn:hover:not(:disabled) {
+    background-color: var(--bgColor3);
+}
+
+.admin-pagination__btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.admin-pagination__info {
+    color: var(--subTextColor);
+    font-size: 13px;
+}
+
+/* ============================================================
+   HUY HIỆU QUYỀN TÀI KHOẢN (bảng "Quản lý tài khoản")
+   ============================================================ */
+.admin-role-badge {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: var(--subTextColor);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 100px;
+    white-space: nowrap;
+}
+
+.admin-role-badge--admin {
+    background-color: rgba(219, 40, 40, 0.15);
+    color: var(--redColor);
+}
+
+/* ============================================================
+   QUẢN LÝ TÀI KHOẢN: thanh công cụ header (tìm kiếm + lọc quyền + xuất CSV)
+   ============================================================ */
+.admin-view__header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.admin-select-filter {
+    background-color: var(--bgColor4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 100px;
+    padding: 10px 16px;
+    color: var(--textColor);
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+}
+
+.admin-export-btn {
+    background-color: var(--bgColor4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--textColor);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 16px;
+    border-radius: 100px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: ease 0.2s;
+}
+
+.admin-export-btn:hover {
+    background-color: var(--bgColor3);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Nút sắp xếp theo số tố cáo (header cột) */
+.admin-table__sort-btn {
+    background: transparent;
+    border: none;
+    color: inherit;
+    font: inherit;
+    font-weight: 600;
+    padding: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.admin-table__sort-btn:hover {
+    color: var(--textColor);
+}
+
+/* Cột "Tài khoản" bấm được để mở modal chi tiết */
+.admin-account-cell--link {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    text-align: left;
+}
+
+.admin-account-cell--link:hover .admin-account-cell__name {
+    text-decoration: underline;
+}
+
+.admin-account-cell__name {
+    display: block;
+    font-weight: 600;
+}
+
+.admin-account-cell__username {
+    display: block;
+    color: var(--subTextColor);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Trạng thái khoá / hoạt động (bảng "Quản lý tài khoản") */
+.admin-role-badge--active {
+    background-color: rgba(56, 176, 106, 0.15);
+    color: #4ADE80;
+}
+
+.admin-role-badge--locked {
+    background-color: rgba(219, 40, 40, 0.15);
+    color: var(--redColor);
+}
+
+/* ============================================================
+   MODAL CHI TIẾT TÀI KHOẢN (hồ sơ + tố cáo hiện có + lịch sử từ chối)
+   ============================================================ */
+.admin-account-modal {
+    width: 620px;
+}
+
+.admin-account-modal__profile {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: 18px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-account-avatar--lg {
+    width: 52px;
+    height: 52px;
+    font-size: 17px;
+    flex-shrink: 0;
+}
+
+.admin-account-modal__name {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.admin-account-modal__meta {
+    color: var(--subTextColor);
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.admin-account-modal__section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.admin-account-report-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.admin-account-report-item {
+    background-color: var(--bgColor3);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.admin-account-report-item--rejected {
+    border-color: rgba(219, 40, 40, 0.25);
+}
+
+.admin-account-report-item__main {
+    flex: 1;
+    min-width: 200px;
+}
+
+.admin-account-report-item__title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.admin-account-report-item__meta {
+    color: var(--subTextColor);
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 4px;
+}
+
+.admin-account-report-item__content {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--subTextColor);
+    line-height: 1.5;
+}
+
+/* RESPONSIVE: màn hình hẹp -> sidebar nằm ngang trên đầu thay vì cột dọc */
+@media (max-width: 900px) {
+    .admin-shell {
+        flex-direction: column;
+    }
+
+    .admin-sidebar {
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        overflow-x: auto;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .admin-sidebar__nav {
+        flex-direction: row;
+    }
+
+    .admin-sidebar__link span:not(.admin-sidebar__icon) {
+        display: none;
+    }
+
+    .admin-sidebar__badge {
+        display: none;
+    }
+
+    .admin-topbar,
+    .admin-content {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .admin-view__header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .admin-search {
+        max-width: none;
+    }
+
+    .admin-view__header-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .admin-account-modal {
+        width: 100%;
+    }
+}
+/* END ADMIN PAGE STYLES */
