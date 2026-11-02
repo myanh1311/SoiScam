@@ -184,7 +184,7 @@ function renderHeaderAccount() {
 
     container.innerHTML = `
         ${adminLinkHTML}
-        <a href="myReports.html" class="header__auth-link header__auth-link--name">Xin chào, ${escapeHeaderText(user.name || user.username)}</a>
+        <a href="my-reports.html" class="header__auth-link header__auth-link--name">Xin chào, ${escapeHeaderText(user.name || user.username)}</a>
         <button type="button" id="headerLogoutBtn" class="header__logout-btn">Đăng xuất</button>
     `;
     document.getElementById("headerLogoutBtn").addEventListener("click", async () => {

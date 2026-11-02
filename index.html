@@ -19,15 +19,15 @@
 </head>
 
 <body>
-    <!-- IMAGES FIXED-->
+    <!-- Hiệu ứng ánh sáng nền -->
      <div class="images-fixed">
         <img src="./assets/images/shield.png" alt="" class="image-shield">
         <img src="./assets/images/stars.png" alt="" class="image-stars">
      </div>
      <div class="effect-circle-1"></div>
      <div class="effect-circle-2"></div>
-    <!-- END IMAGES FIXED-->
-    <!-- Header -->
+    <!-- Hết hiệu ứng ánh sáng nền -->
+    <!-- Đầu trang -->
     <header class="header">
         <a href="index.html" class="header__logo">
             <img src="./assets/images/logo.png" alt="logo" class="header__logo-img">
@@ -38,13 +38,13 @@
                 <a href="index.html" class="header__nav-link active">Trang chủ</a>
             </li>
             <li class="header_nav--item">
-                <a href="./scammerList.html" class="header__nav-link">Scamer</a>
+                <a href="./scammer-list.html" class="header__nav-link">Scamer</a>
             </li>
             <li class="header_nav--item">
                 <a href="./report.html" class="header__nav-link">Gửi tố cáo</a>
             </li>
             <li class="header_nav--item">
-                <a href="./gioi-thieu.html" class="header__nav-link">Giới thiệu</a>
+                <a href="./about.html" class="header__nav-link">Giới thiệu</a>
             </li>
         </ul>
         <div class="header__actions">
@@ -61,9 +61,9 @@
             </div>
         </div>
     </header>
-    <!--End Header -->
+    <!-- Hết đầu trang -->
 
-    <!-- HERO -->
+    <!-- Banner đầu trang -->
     <section class="hero" id="hero">
         <div class="hero__bg" aria-hidden="true">
             <span class="hero__orb hero__orb--1"></span>
@@ -95,7 +95,7 @@
                             </svg>
                         </span>
                     </a>
-                    <a href="scammerList.html" class="hero__ghost-link">Xem danh sách Scammer</a>
+                    <a href="scammer-list.html" class="hero__ghost-link">Xem danh sách Scammer</a>
                 </div>
 
                 <div class="hero__stats hero__reveal" data-reveal="lift" style="animation-delay:.5s">
@@ -139,7 +139,7 @@
             </svg>
         </button>
     </section>
-    <!-- END HERO -->
+    <!-- Hết banner đầu trang -->
 
     <div class="container">
         <!-- TÌM KIẾM NHANH -->
@@ -149,9 +149,9 @@
                 <button class="btn form-search__btn" type="submit">Tìm kiếm</button>
             </form>
         </section>
-        <!-- END TÌM KIẾM NHANH -->
+        <!-- Hết tìm kiếm nhanh -->
 
-        <!-- SCAMMER -->
+        <!-- Danh sách scammer -->
         <section class="alert-scam reveal-up-scroll" style="transition-delay:.08s">
             <div class="alert-scam__header">
                 <h2 class="alert-scam__title today title reveal-el" data-reveal="rise">Hôm nay </h2>
@@ -162,9 +162,9 @@
 
             </ul>
         </section>
-        <!-- End SCAMMER -->
+        <!-- Hết danh sách scammer -->
 
-        <!-- WARNING -->
+        <!-- Cảnh báo -->
         <section class="warning"></section>
         <h2 class="warning__title title reveal-up-scroll">Một số kiểu lừa đảo online thường gặp</h2>
         <ul class="warning__list">
@@ -205,10 +205,10 @@
                 <div class="warning__content">Mời làm nhiệm vụ online, đầu tư lãi cao bất thường. Ban đầu cho nhận tiền nhỏ để tạo niềm tin rồi yêu cầu nạp số tiền lớn và biến mất.</div>
             </li>
         </ul>
-        <!--End WARNING -->
+        <!-- Hết cảnh báo -->
     </div>
 
-    <!-- MODAL XEM NHANH 1 SCAMMER (chỉ ở mục "Hôm nay"; có link sang scammerDetail.html?id=...) -->
+    <!-- MODAL XEM NHANH 1 SCAMMER (chỉ ở mục "Hôm nay"; có link sang scammer-detail.html?id=...) -->
     <div class="modal" id="quickViewModal" hidden>
         <div class="modal__overlay" data-close-quickview></div>
         <div class="modal__content">
@@ -221,9 +221,9 @@
             <div class="modal__body" id="quickViewBody"></div>
         </div>
     </div>
-    <!-- END MODAL XEM NHANH -->
+    <!-- Hết modal xem nhanh -->
 
-    <!-- JS -->
+    <!-- Script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.9.0/lightgallery.min.js"></script>
     <script src="https://unpkg.com/axios@1.13.2/dist/axios.min.js"></script>
     <script src="./assets/js/app.js"></script>
@@ -234,7 +234,7 @@
     <script src="./assets/js/search.js"></script>
     <script src="./assets/js/hero.js"></script>
     <script src="./assets/js/reveal.js"></script>
-    <!-- End JS -->
+    <!-- Hết script -->
     <script src="./assets/js/fx.js"></script>
 </body>
 

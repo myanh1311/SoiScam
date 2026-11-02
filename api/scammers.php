@@ -236,7 +236,7 @@ if ($action === 'reject' && $method === 'POST') {
     json_response(['success' => true]);
 }
 
-// ---------- Tố cáo của tôi (myReports.html) ----------
+// ---------- Tố cáo của tôi (my-reports.html) ----------
 // Report do chính người đang đăng nhập gửi, kể cả đang chờ duyệt.
 if ($action === 'mine' && $method === 'GET') {
     $user = require_login();

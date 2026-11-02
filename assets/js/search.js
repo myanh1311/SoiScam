@@ -1,9 +1,9 @@
 // ============================================================
-// SEARCH FEATURE
+// Tìm kiếm
 // Tìm mờ (fuzzy, không phân biệt hoa/thường & dấu tiếng Việt)
 // theo tên, số điện thoại, số tài khoản, tên ngân hàng.
 // Kết quả hiển thị dạng dropdown ngay dưới ô tìm kiếm. Mỗi kết quả là
-// 1 link điều hướng sang trang chi tiết riêng (scammerDetail.html?id=...),
+// 1 link điều hướng sang trang chi tiết riêng (scammer-detail.html?id=...),
 // dùng groupedScammers từ index.js - đây là dữ liệu ĐÃ GỘP theo số tài
 // khoản nên search cũng thấy luôn số lượt tố.
 // ============================================================
@@ -95,7 +95,7 @@
                 .map((item) => {
                     const countText = item.reportCount > 1 ? ` · ${item.reportCount} lượt tố` : "";
                     return `
-                <a class="search-results__item" href="scammerDetail.html?id=${encodeURIComponent(item.id)}">
+                <a class="search-results__item" href="scammer-detail.html?id=${encodeURIComponent(item.id)}">
                     <img src="./assets/images/avatar-1.png" alt="avatar" class="search-results__avatar">
                     <div class="search-results__info">
                         <h4 class="search-results__name">${highlight(item.nameScammer, keyword)}</h4>

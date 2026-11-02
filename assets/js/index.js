@@ -1,4 +1,4 @@
-// Variables
+// Biến dùng chung
 const warningHeader = document.querySelectorAll(".warning__header");
 const scammerList = document.querySelector(".scammer__list");
 const today = document.querySelector(".today");
@@ -9,11 +9,11 @@ const SCAMMER_PAGE_SIZE = 9; // số thẻ hiển thị mỗi lượt tải (tra
 let scammerRenderQueue = [];
 let scammerRenderIndex = 0;
 let scammerScrollObserver = null;
-// End Variables
+// Hết biến dùng chung
 
 // Lưu ý: nhúng assets/js/scammer-data.js TRƯỚC file này (có normalizeBankNumber và API_BASE).
 
-// HANDLE FORMAT DATE
+// Định dạng ngày
 function formatDate(dateString) {
     const date = dateString ? new Date(dateString) : new Date();
 
@@ -26,13 +26,13 @@ function formatDate(dateString) {
 
     return `${formattedDay}/${formattedMonth}/${year}`;
 }
-// END HANDLE FORMAT DATE
+// Hết định dạng ngày
 
 if (today) {
     today.textContent = `Hôm nay ${formatDate(new Date())}`;
 }
 
-// Handle dropdown warning
+// Menu xổ xuống cảnh báo
 warningHeader.forEach((item) => item.addEventListener("click", handleShowDropdown));
 
 function handleShowDropdown(e) {
@@ -61,16 +61,16 @@ function handleShowDropdown(e) {
         warningContent.style.height = 0
     }
 }
-// endHandle dropdown warning
+// Hết menu xổ xuống cảnh báo
 
 // HTML 1 thẻ scammer (dùng cho trang chủ và trang Scamer).
-// Cả thẻ là link sang scammerDetail.html?id=... để có URL thật, chia sẻ được.
+// Cả thẻ là link sang scammer-detail.html?id=... để có URL thật, chia sẻ được.
 function scammerItemHTML(item) {
     const badgeHTML = item.reportCount > 1
         ? `<span class="scammer__badge">${item.reportCount} lượt tố</span>`
         : "";
     return `<li class="scammer__item">
-                    <a class="scammer__item-link" href="scammerDetail.html?id=${encodeURIComponent(item.id)}">
+                    <a class="scammer__item-link" href="scammer-detail.html?id=${encodeURIComponent(item.id)}">
                         <img src="./assets/images/avatar-1.png" alt="avatar" class="scammer__avatar">
                         <div class="scammer__info">
                             <h3 class="scammer__name">${escapeHtml(item.nameScammer)}</h3>
@@ -84,11 +84,11 @@ function scammerItemHTML(item) {
 // HANDLE RENDER SCAMMER LIST (cảnh báo hôm nay - trang chủ)
 function renderScammerToday(data) {
     const todayDate = new Date();
-    todayDate.setHours(0, 0, 0, 0); // Set time to midnight for comparison
+    todayDate.setHours(0, 0, 0, 0); // Đưa về 0h để so sánh theo ngày
 
     const todayData = data.filter(item => {
         const itemDate = new Date(item.latestDate || item.date);
-        itemDate.setHours(0, 0, 0, 0); // Set time to midnight for comparison
+        itemDate.setHours(0, 0, 0, 0); // Đưa về 0h để so sánh theo ngày
         return itemDate.getTime() === todayDate.getTime();
     })
 
@@ -109,7 +109,7 @@ function renderScammerToday(data) {
     }
 }
 
-//END HANDLE RENDER SCAMMER LIST
+// Hết hiển thị danh sách scammer
 
 // ---------- Render danh sách đầy đủ (trang Scamer) có infinite scroll ----------
 // Tải 1 lần toàn bộ (để search), nhưng chỉ render từng đợt SCAMMER_PAGE_SIZE thẻ;
@@ -172,7 +172,7 @@ function observeScammerSentinel() {
     }
     scammerScrollObserver.observe(sentinel);
 }
-// END HANDLE RENDER FULL SCAMMER LIST
+// Hết hiển thị đầy đủ danh sách scammer
 
 // ---------- Lọc + sắp xếp danh sách scammer (trang Scamer) ----------
 // Dữ liệu đã tải đủ ở groupedScammers nên lọc ngay trên trình duyệt.
@@ -210,9 +210,9 @@ if (filterBank && filterSort) {
     filterBank.addEventListener("change", applyScammerFilters);
     filterSort.addEventListener("change", applyScammerFilters);
 }
-// END LỌC + SẮP XẾP
+// Hết lọc + sắp xếp
 
-// HANDLE GET SCAMMER DATA
+// Lấy dữ liệu scammer
 async function getScammer() {
     try {
         // publicOnly: true - trang công khai chỉ hiện report đã được admin duyệt (server đã gộp sẵn).
@@ -235,10 +235,10 @@ async function getScammer() {
     }
 }
 getScammer();
-// END HANDLE GET SCAMMER DATA
+// Hết lấy dữ liệu scammer
 
 // ---------- Modal xem nhanh 1 scammer (chỉ ở mục "Hôm nay" trang chủ) ----------
-// Trang Scamer vẫn chuyển sang scammerDetail.html?id=...; modal có link tới trang đó để chia sẻ.
+// Trang Scamer vẫn chuyển sang scammer-detail.html?id=...; modal có link tới trang đó để chia sẻ.
 // Chỉ gắn khi có phần tử "today" (chỉ có ở index.html).
 const quickViewModal = document.getElementById("quickViewModal");
 const quickViewBody = document.getElementById("quickViewBody");
@@ -319,7 +319,7 @@ function quickViewDetailHTML(scammer) {
                 <span class="modal__detail-text modal__detail-text--highlight">${scammer.reportCount} lượt</span>
             </div>
             <div class="scammer-detail__actions">
-                <a href="scammerDetail.html?id=${encodeURIComponent(scammer.id)}" class="btn scammer-detail__action-btn">Xem trang đầy đủ để chia sẻ</a>
+                <a href="scammer-detail.html?id=${encodeURIComponent(scammer.id)}" class="btn scammer-detail__action-btn">Xem trang đầy đủ để chia sẻ</a>
             </div>
         </div>
         ${reportsHTML}
@@ -363,4 +363,4 @@ if (today && quickViewModal) {
         }
     });
 }
-// END MODAL XEM NHANH 1 SCAMMER
+// Hết modal xem nhanh 1 scammer

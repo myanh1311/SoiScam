@@ -11,7 +11,7 @@
 
 }
 
-/* Cuộn mượt khi bấm vào link neo (vd header "Giới thiệu" -> #gioi-thieu ở
+/* Cuộn mượt khi bấm vào link neo (vd header "Giới thiệu" -> #about ở
    index.html) thay vì nhảy khựng 1 phát tới nơi. Tắt theo
    prefers-reduced-motion để tôn trọng lựa chọn "giảm chuyển động" của
    người dùng, giống các hiệu ứng khác trên trang. */
@@ -47,13 +47,13 @@ body {
     padding-bottom: 100px;
 }
 
-/* TOAST STYLE */
+/* Thông báo nhanh (toast) */
 .fui-toast-body {
    color: var(--textBtnColor);
 }
-/* end TOAST STYLE */
+/* Hết thông báo nhanh (toast) */
 
-/* ERROR MESSAGE STYLE */
+/* Thông báo lỗi */
 .form-message {
     color: var(--redColor);
     font-size: 14px;
@@ -61,10 +61,10 @@ body {
     top: 0;
     right: 0;
 }
-/* END ERROR MESSAGE STYLE */
+/* Hết thông báo lỗi */
 
 
-/* EFFECT CIRCLE */
+/* Quầng sáng nền */
 .effect-circle-1 {
     width: 530px;
     height: 530px;
@@ -91,8 +91,8 @@ body {
     opacity: 0.5;
 }
 
-/* END EFFECT CIRCLE */
-/* Button Styles */
+/* Hết quầng sáng nền */
+/* Nút bấm */
 .btn {
     padding: 12px 20px;
     border-radius: 12px;
@@ -104,9 +104,9 @@ body {
     outline: none;
 }
 
-/* End Button Styles */
+/* Hết nút bấm */
 
-/* TITLE STYLE */
+/* Tiêu đề */
 .title {
     font-weight: 800;
     font-size: 30px;
@@ -116,9 +116,9 @@ body {
     -webkit-background-clip: text;
 }
 
-/* END TITLE STYLE */
+/* Hết tiêu đề */
 
-/* Header Styles */
+/* Đầu trang */
 .header {
     margin-top: 25px;
     margin-inline: 6%;
@@ -404,7 +404,7 @@ body {
     }
 }
 
-/* End Header Styles */
+/* Hết đầu trang */
 
 /* ============================================================
    HIỆU ỨNG CHUYỂN TRANG (View Transitions API - điều hướng multi-page).
@@ -428,7 +428,7 @@ body {
         animation: none !important;
     }
 }
-/* END HIỆU ỨNG CHUYỂN TRANG */
+/* Hết hiệu ứng chuyển trang */
 
 /* ============================================================
    ANIMATION "HIỆN DẦN KHI CUỘN TỚI" DÙNG CHUNG CHO CÁC TRANG - gắn class
@@ -465,7 +465,7 @@ body {
     transform: translateY(-4px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
 }
-/* END ANIMATION ENTRANCE DÙNG CHUNG */
+/* Hết animation entrance dùng chung */
 
 /* ============================================================
    HỆ ANIMATION "RISE / LIFT / SETTLE" DÙNG CHUNG (giống hero) - gắn class
@@ -545,10 +545,10 @@ body {
         transform: translateY(0) scale(1);
     }
 }
-/* END HỆ ANIMATION RISE/LIFT/SETTLE DÙNG CHUNG */
-/* END HIỆU ỨNG CHUYỂN TRANG */
+/* Hết hệ animation rise/lift/settle dùng chung */
+/* Hết hiệu ứng chuyển trang */
 
-/* MODAL STYLE */
+/* Modal */
 .modal {
     position: fixed;
     top: 0;
@@ -737,4 +737,4 @@ body {
     opacity: 0.5;
 }
 
-/* End MODAL STYLE */
+/* Hết modal */

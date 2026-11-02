@@ -14,7 +14,7 @@ require_once __DIR__ . '/mail.php';
 require_once __DIR__ . '/google.php';
 
 // ------------------------------------------------------------
-// REQUEST / RESPONSE
+// Request và response
 // ------------------------------------------------------------
 function request_host(): string {
     $host = $_SERVER['HTTP_HOST'] ?? '';

@@ -94,7 +94,7 @@ function animateNumber(el, target) {
     const start = performance.now();
     function tick(now) {
         const progress = Math.min(1, (now - start) / duration);
-        const eased = 1 - Math.pow(1 - progress, 3); // ease-out
+        const eased = 1 - Math.pow(1 - progress, 3); // giảm tốc dần về cuối
         el.textContent = Math.round(from + (to - from) * eased);
         if (progress < 1) requestAnimationFrame(tick);
     }
@@ -240,7 +240,7 @@ function renderMyReports() {
                 ? `<span class="my-reports__status my-reports__status--approved">Đã duyệt</span>`
                 : `<span class="my-reports__status my-reports__status--pending">Đang chờ duyệt</span>`;
             const linkHTML = isApproved
-                ? `<a href="scammerDetail.html?id=${encodeURIComponent(item.groupId)}" class="my-reports__link">Xem trang công khai</a>`
+                ? `<a href="scammer-detail.html?id=${encodeURIComponent(item.groupId)}" class="my-reports__link">Xem trang công khai</a>`
                 : "";
 
             return `

@@ -1,4 +1,4 @@
-/* BREADCRUMB STYLES */
+/* Đường dẫn trang */
 .breadcrumb {
     margin-inline: 6%;
     margin-top: 16px;
@@ -22,9 +22,9 @@
     color: var(--textColor);
 }
 
-/* END BREADCRUMB STYLES */
+/* Hết đường dẫn trang */
 
-/* FORM REPORT STYLES */
+/* Form tố cáo */
 .form-report {
     max-width: 830px;
     margin-inline: auto;
@@ -107,11 +107,6 @@
 }
 
 .form__upload-group {
-    /* width: 128px;
-    height: 114px;
-    border-radius: 8px;
-    background-color: var(--bgColor3);
-    position: relative; */
     max-width: 128px;
     width: 100%;
     height: 114px;
@@ -210,4 +205,4 @@
     display: block;
 }
 
-/* END FORM REPORT STYLES */
+/* Hết form tố cáo */

@@ -33,7 +33,7 @@ Website cộng đồng tra cứu và tố cáo tài khoản ngân hàng, số đ
 ## Cấu trúc thư mục
 
 ```
-index.html, scammerList.html, ...   các trang giao diện
+index.html, scammer-list.html, ...   các trang giao diện
 assets/css, assets/js               giao diện và script từng trang
 api/                                backend PHP (auth, scammers, users, stats, upload...)
 api/lib/                            hàm dùng chung (helpers, mail, rate-limit, google)

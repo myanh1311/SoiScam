@@ -2,7 +2,7 @@
 // MENU DI ĐỘNG CHO HEADER (dùng chung mọi trang có .header)
 // Dưới 880px, .header_nav-list ẩn vào 1 bảng thả xuống, mở/đóng bằng
 // nút hamburger .header__burger. Không phụ thuộc app.js (trang
-// myReports.html/404.html không có app.js) nên tách file riêng.
+// my-reports.html/404.html không có app.js) nên tách file riêng.
 // ============================================================
 (function () {
     const header = document.querySelector(".header");

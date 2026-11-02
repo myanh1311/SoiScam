@@ -1,4 +1,4 @@
-// VARIABLES
+// Biến dùng chung
 // Ảnh gửi qua api/upload.php (khoá ImgBB nằm trên server).
 const uploadImageInput = document.getElementById("uploadImage");
 const formUploadWrap = document.querySelector(".form__upload-wrap");
@@ -6,7 +6,7 @@ let arrayImage = [];
 const phoneScammerInput = document.getElementById("phoneScammer");
 const phoneSenderInput = document.getElementById("phoneSender");
 const contentReportInput = document.getElementById("contentReport");
-// END VARIABLES
+// Hết biến dùng chung
 
 // ---------- Điền sẵn thông tin scammer từ URL ----------
 // Link "Tôi cũng bị lừa bởi STK này" có dạng report.html?bankNumber=...&bankName=...&nameScammer=...
@@ -25,7 +25,7 @@ const contentReportInput = document.getElementById("contentReport");
         }
     });
 })();
-// END HANDLE ĐIỀN SẴN THÔNG TIN SCAMMER TỪ URL
+// Hết điền sẵn thông tin scammer từ URL
 
 // ---------- Lưu tạm form khi chưa đăng nhập ----------
 // Bấm "Gửi tố cáo" mà chưa đăng nhập: lưu form (kể cả ảnh) vào sessionStorage rồi sang login.html.
@@ -93,7 +93,7 @@ function restoreReportDraftIfAny() {
     }
 }
 restoreReportDraftIfAny();
-// END LƯU TẠM FORM KHI CHƯA ĐĂNG NHẬP MÀ ĐÃ BẤM "GỬI TỐ CÁO"
+// Hết lưu tạm form khi chưa đăng nhập mà đã bấm "Gửi tố cáo"
 
 // ---------- Điền sẵn tên người gửi nếu đã đăng nhập ----------
 // Không khoá ô để vẫn sửa được khi gửi hộ người khác.
@@ -106,16 +106,16 @@ restoreReportDraftIfAny();
         nameSenderInput.value = currentUser.name || "";
     }
 })();
-// END ĐIỀN SẴN THÔNG TIN NGƯỜI GỬI
+// Hết điền sẵn thông tin người gửi
 
-// HANDLE CONTENT REPORT INPUT
+// Ô nội dung tố cáo tự giãn chiều cao
 contentReportInput.addEventListener("input", (e) => {
-    e.target.style.height = "auto"; // Reset height to auto to recalculate scrollHeight
-    e.target.style.height = e.target.scrollHeight + "px"; // Set height to scrollHeight
+    e.target.style.height = "auto"; // Đặt lại chiều cao để tính lại scrollHeight
+    e.target.style.height = e.target.scrollHeight + "px"; // Gán chiều cao bằng scrollHeight
 })
-// END HANDLE CONTENT REPORT INPUT
+// Hết ô nội dung tố cáo tự giãn chiều cao
 
-// HANDLE INPUT ONLY NUMBER
+// Ô số chỉ cho nhập chữ số
 phoneScammerInput.addEventListener("keypress", handleInputOnlyNumber)
 phoneSenderInput.addEventListener("keypress", handleInputOnlyNumber)
 function handleInputOnlyNumber(e) {
@@ -123,9 +123,9 @@ function handleInputOnlyNumber(e) {
         e.preventDefault();
     }
 }
-// END HANDLE INPUT ONLY NUMBER
+// Hết ô số chỉ cho nhập chữ số
 
-// HANDLE UPLOAD IMGBB
+// Tải ảnh lên server
 
 async function uploadImgBB(file) {
     const formData = new FormData();
@@ -144,9 +144,9 @@ async function uploadImgBB(file) {
     }
 }
 
-// END HANDLE UPLOAD IMGBB
+// Hết tải ảnh lên server
 
-// HANDLE UPLOAD IMAGE
+// Chọn và xem trước ảnh
 uploadImageInput.addEventListener("change", handleUploadImage);
 
 // Thêm ô preview ảnh (ảnh mới chọn hoặc ảnh cũ từ bản nháp).
@@ -203,7 +203,7 @@ formUploadWrap.addEventListener("click", (e) => {
         console.log(arrayImage);
     }
 });
-// END HANDLE UPLOAD IMAGE
+// Hết chọn và xem trước ảnh
 
 // ---------- Gửi tố cáo lên api/scammers.php?action=submit ----------
 // Server lo việc gộp theo số tài khoản, chống spam và gắn report với tài khoản đang đăng nhập.
@@ -230,9 +230,9 @@ async function submitScammerReport(formValues) {
 
     await FuiToast.success("Gửi tố cáo thành công! Tố cáo của bạn sẽ hiển thị công khai sau khi Admin duyệt.");
 }
-// END HANDLE GỘP BÁO CÁO THEO SỐ TÀI KHOẢN
+// Hết gộp báo cáo theo số tài khoản
 
-// VALIDATE SUBMIT FORM REPORT
+// Kiểm tra và gửi form tố cáo
 Validator({
     form: "#form-report",
     formGroupSelector: ".form__group",
@@ -294,4 +294,4 @@ Validator({
     },
     resetOnSubmit: true,  // Reset form sau khi submit thành công
 });
-// END VALIDATE SUBMIT FORM REPORT
+// Hết kiểm tra và gửi form tố cáo

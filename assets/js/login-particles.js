@@ -30,9 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const p = document.createElement("span");
         p.className = "login-particle";
 
-        const size = (Math.random() * 3 + 2).toFixed(1); // 2px -> 5px
+        const size = (Math.random() * 3 + 2).toFixed(1); // 2px đến 5px
         const left = (Math.random() * 100).toFixed(2); // % ngang
-        const duration = (Math.random() * 10 + 10).toFixed(1); // 10s -> 20s
+        const duration = (Math.random() * 10 + 10).toFixed(1); // 10 đến 20 giây
         const delay = (Math.random() * -20).toFixed(1); // âm để hạt đã "đang rơi" ngay khi tải trang, không dồn cục lúc đầu
         const drift = (Math.random() * 60 - 30).toFixed(0); // trôi ngang -30px -> 30px
 

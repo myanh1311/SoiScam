@@ -14,7 +14,7 @@ body {
     min-height: 100vh;
 }
 
-/* SIDEBAR */
+/* Thanh bên */
 .admin-sidebar {
     width: 280px;
     flex-shrink: 0;
@@ -98,7 +98,7 @@ body {
     border-radius: 100px;
 }
 
-/* MAIN AREA */
+/* Khu vực chính */
 .admin-main {
     flex: 1;
     min-width: 0;
@@ -175,7 +175,7 @@ body {
     text-align: center;
 }
 
-/* SEARCH BOX */
+/* Ô tìm kiếm */
 .admin-search {
     position: relative;
     width: 100%;
@@ -221,7 +221,7 @@ body {
     color: var(--redColor);
 }
 
-/* ADMIN TABLE */
+/* Bảng quản trị */
 .admin-table-wrap {
     background-color: var(--bgColor4);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -959,4 +959,4 @@ body {
         width: 100%;
     }
 }
-/* END ADMIN PAGE STYLES */
+/* Hết giao diện trang quản trị */

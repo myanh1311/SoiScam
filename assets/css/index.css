@@ -1,4 +1,4 @@
-/* IMAGES FIXED STYLES */
+/* Hiệu ứng ánh sáng nền */
 .images-fixed{
     position: fixed;
     top: 400px;
@@ -15,8 +15,8 @@
     left: 50%;
     transform: translateX(-50%);
 }
-/* END IMAGES FIXED STYLES */
-/* CONTENT STYLES */
+/* Hết hiệu ứng ánh sáng nền */
+/* Nội dung chung */
 .content {
     max-width: 664px;
     width: 100%;
@@ -71,9 +71,9 @@
 .form-search__btn {
     flex-shrink: 0;
 }
-/* END CONTENT STYLES */
+/* Hết nội dung chung */
 
-/* SEARCH RESULTS DROPDOWN */
+/* Kết quả tìm kiếm (xổ xuống) */
 .search-results {
     position: absolute;
     top: calc(100% + 10px);
@@ -149,10 +149,10 @@
     font-weight: 700;
 }
 
-/* END SEARCH RESULTS DROPDOWN */
+/* Hết kết quả tìm kiếm (xổ xuống) */
 
 
-/* SCAMMER LIST */
+/* Danh sách scammer */
 .alert-scam {
     margin-top: 138px;
     /* Chất liệu kính mờ đồng bộ với .hero__panel (index.html) */
@@ -324,11 +324,11 @@
 .scammer-filter + .scammer__list {
     padding-top: 24px;
 }
-/* End BỘ LỌC */
+/* Hết bộ lọc */
 
-/* End SCAMMER LIST */
+/* Hết danh sách scammer */
 
-/* SCAMMER DETAIL PAGE */
+/* Trang chi tiết scammer */
 .scammer-detail {
     margin-top: 138px;
     margin-bottom: 60px;
@@ -456,9 +456,9 @@
     flex-direction: column;
     gap: 16px;
 }
-/* END SCAMMER DETAIL PAGE */
+/* Hết trang chi tiết scammer */
 
-/* WARNING STYLE */
+/* Cảnh báo */
 .warning {
     margin-top: 60px;
 }
@@ -519,7 +519,7 @@
     transform: rotate(90deg);
     transition: transform ease 0.2s;
 }
-/* END WARNING STYLE */
+/* Hết cảnh báo */
 
-/* Mục "Giới thiệu" giờ là 1 trang riêng (gioi-thieu.html, CSS riêng ở
-   assets/css/gioi-thieu.css) thay vì 1 section neo ở cuối trang chủ. */
+/* Mục "Giới thiệu" giờ là 1 trang riêng (about.html, CSS riêng ở
+   assets/css/about.css) thay vì 1 section neo ở cuối trang chủ. */

@@ -18,7 +18,7 @@
         const start = performance.now();
         function tick(now) {
             const progress = Math.min(1, (now - start) / duration);
-            const eased = 1 - Math.pow(1 - progress, 3); // ease-out
+            const eased = 1 - Math.pow(1 - progress, 3); // giảm tốc dần về cuối
             el.textContent = Math.round(target * eased).toLocaleString("vi-VN");
             if (progress < 1) requestAnimationFrame(tick);
         }

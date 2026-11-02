@@ -17,11 +17,11 @@
 </head>
 
 <body>
-    <!-- IMAGES FIXED-->
+    <!-- Hiệu ứng ánh sáng nền -->
     <div class="effect-circle-1"></div>
     <div class="effect-circle-2"></div>
-    <!-- END IMAGES FIXED-->
-    <!-- Header -->
+    <!-- Hết hiệu ứng ánh sáng nền -->
+    <!-- Đầu trang -->
     <header class="header">
         <a href="index.html" class="header__logo">
             <img src="./assets/images/logo.png" alt="logo" class="header__logo-img">
@@ -32,13 +32,13 @@
                 <a href="index.html" class="header__nav-link">Trang chủ</a>
             </li>
             <li class="header_nav--item">
-                <a href="./scammerList.html" class="header__nav-link active">Scamer</a>
+                <a href="./scammer-list.html" class="header__nav-link active">Scamer</a>
             </li>
             <li class="header_nav--item">
                 <a href="./report.html" class="header__nav-link">Gửi tố cáo</a>
             </li>
             <li class="header_nav--item">
-                <a href="./gioi-thieu.html" class="header__nav-link">Giới thiệu</a>
+                <a href="./about.html" class="header__nav-link">Giới thiệu</a>
             </li>
         </ul>
         <div class="header__actions">
@@ -55,17 +55,17 @@
             </div>
         </div>
     </header>
-    <!--End Header -->
+    <!-- Hết đầu trang -->
 
-    <!-- form search -->
+    <!-- Form tìm kiếm -->
     <form class="form-search form-search__custom reveal-up-scroll">
         <input type="text" placeholder="Kiểm tra số tài khoản, SĐT hoặc tên..." class="form-search__input" autocomplete="off" />
         <button class="btn form-search__btn" type="submit">Tìm kiếm</button>
     </form>
-    <!-- End form search -->
+    <!-- Hết form tìm kiếm -->
 
     <div class="container">
-        <!-- SCAMMER -->
+        <!-- Danh sách scammer -->
         <section class="alert-scam alert-scam__custom reveal-up-scroll" style="transition-delay:.08s">
             <div class="alert-scam__header">
                 <h2 class="alert-scam__title title reveal-el" data-reveal="rise">Danh sách scam</h2>
@@ -92,9 +92,9 @@
                 <li class="scammer__state">Đang tải danh sách...</li>
             </ul>
         </section>
-        <!-- End SCAMMER -->
+        <!-- Hết danh sách scammer -->
     </div>
-    <!-- JS -->
+    <!-- Script -->
     <script src="https://unpkg.com/axios@1.13.2/dist/axios.min.js"></script>
     <script src="./assets/js/app.js"></script>
     <script src="./assets/js/scammer-data.js"></script>
@@ -103,7 +103,7 @@
     <script src="./assets/js/index.js"></script>
     <script src="./assets/js/search.js"></script>
     <script src="./assets/js/reveal.js"></script>
-    <!-- End JS -->
+    <!-- Hết script -->
     <script src="./assets/js/fx.js"></script>
 </body>
 

@@ -1,5 +1,5 @@
 // ============================================================
-// TRANG CHI TIẾT SCAMMER (scammerDetail.html?id=...)
+// TRANG CHI TIẾT SCAMMER (scammer-detail.html?id=...)
 // Có URL thật để chia sẻ và Google index. Dùng dữ liệu từ scammer-data.js.
 // ============================================================
 const detailContainer = document.getElementById("scammerDetail");
